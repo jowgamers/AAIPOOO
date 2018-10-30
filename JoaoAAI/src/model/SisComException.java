@@ -1,21 +1,27 @@
 package model;
 
-public class SisComException {
+public class SisComException extends Exception{
 
 	
 	private String nomeProduto;
 	private int estoque;
 	private String mensagemErro;
 	
-	public SisComException () {
-		
+	/**
+	 * 
+	 * @param nomeProduto
+	 */
+	public SisComException (String nomeProduto) {
+		super();
 	}
 	
-	public SisComException(String nomeProduto, int estoque, String mensagemErro) {
+	public SisComException (String nomeProduto, int estoque) {
 		super();
-		this.nomeProduto = nomeProduto;
-		this.estoque = estoque;
-		this.mensagemErro = mensagemErro;
+	}
+	
+
+	public SisComException (String nomeProduto, int estoque, String mensagemErro) {
+		super();
 	}
 	
 	
