@@ -5,11 +5,12 @@ public class Vendedor extends Pessoa{
 	//
 	private String cnpj;
 	private double metaMensal;
-	
 	//
+	
 	public Vendedor () {
 		
 	}
+	
 	public Vendedor(String cnpj, double metaMensal) {
 		super();
 		this.cnpj = cnpj;
@@ -29,7 +30,6 @@ public class Vendedor extends Pessoa{
 	public void setNomeContato(double metaMensal) {
 		this.metaMensal = metaMensal;
 	}
-	
 	
 	//
 	@Override

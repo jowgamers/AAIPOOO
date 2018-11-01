@@ -2,7 +2,7 @@ package model;
 
 import java.util.Date;
 
-public class Produto {
+public class Produto implements Comparable{
 
 	private int codigo;
 	private String nome;
@@ -11,10 +11,42 @@ public class Produto {
 	private int estoqueminimo;
 	private Date dataCad;
 	
+	//Decrementar estoque
 	
+	/**
+	 * @Metodo não testado
+	 * @param qntde
+	 */
+	private void addQntde (int qntde) {
+		qntde += getEstoque();
+		setEstoque(qntde);
+	}
+	
+	/**
+	 * @Metodo não testado
+	 * @param qntde // Nao aceitar valores negativos -- Metodo não está pronto
+	 */
+	private void decreQntde (int qntde) throws SisComException{
+
+		try {
+			qntde -= getEstoque();
+			setEstoque(qntde);
+		} catch (Exception e) {
+			throw new SisComException("Quantidade insuficiente");
+		}
+		
+	}
 	public Produto () {
 		
 	}
+	/**
+	 * 
+	 */
+	@Override
+	public int compareTo(Object arg0) {
+		return 0;
+	}
+	
 	
 	public Produto(int codigo, String nome, double precoUnitario, int estoque, int estoqueminimo, Date dataCad) {
 		super();
@@ -63,7 +95,16 @@ public class Produto {
 	public void setDataCad(Date dataCad) {
 		this.dataCad = dataCad;
 	}
-	
+	/**
+	 * 
+	 * 
+	 */
+	@Override
+	public String toString() {
+		return "Produto [codigo=" + codigo + ", nome=" + nome + ", precoUnitario=" + precoUnitario + ", estoque="
+				+ estoque + ", estoqueminimo=" + estoqueminimo + ", dataCad=" + dataCad + "]";
+	}
+
 	
 	
 }

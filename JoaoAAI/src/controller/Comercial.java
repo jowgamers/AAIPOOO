@@ -13,18 +13,23 @@ import model.Vendedor;
 
 public class Comercial {
 
-	private ArrayList<Produto> produto = new ArrayList<Produto>();
-	private ArrayList<Pessoa> pessoa = new ArrayList<Pessoa>();
-	private ArrayList<ItemCompra> itemCompra = new ArrayList<ItemCompra>();
-	private ArrayList<ItemVenda> itemVenda = new ArrayList<ItemVenda>();
+	private ArrayList<Produto> listaProduto = new ArrayList<Produto>();
+	private ArrayList<Pessoa> listaPessoa = new ArrayList<Pessoa>();
+	private ArrayList<ItemCompra> listaItemCompra = new ArrayList<ItemCompra>();
+	private ArrayList<ItemVenda> listaItemVenda = new ArrayList<ItemVenda>();
 
+	
+	
+	
+	
+	
 	/**
 	 * @author Joao Vitor Franco Resende
 	 * @param  produto
 	 * @throws SisComException
 	 */
 	public void cadastrarProduto(Produto produto) throws SisComException {
-		boolean adicionar = getProduto().add(produto);
+		boolean adicionar = getListaProduto().add(produto);
 		if (!adicionar) {
 			throw new SisComException("Erro ao cadastrar produto!!!");
 		}
@@ -33,6 +38,7 @@ public class Comercial {
 	/**
 	 * @author Joao Vitor Franco Resende
 	 * @param  pessoa
+	 * 
 	 * @throws SisComException
 	 * 
 	 */
@@ -41,14 +47,14 @@ public class Comercial {
 			Pessoa pessoaTemp = validaPessoa(pessoa);
 			//Mensagem de erro
 		} catch (Exception e) {
-			//pessoa.setCodigo(pessoa.size() + 1); //Não ta reconhecendo o metodo SIZE da array
-			boolean adicionar = getPessoa().add(pessoa);
+			pessoa.setCodigo(listaPessoa.size() + 1); // Thiago deu a ideia de fazer assim, presta? não sei mas a ideia é boa
+			boolean adicionar = getListaPessoa().add(pessoa);
 			if (!adicionar) {
 				throw new SisComException("Erro ao cadastrar pessoa!!!");
-				// TODO: handle exception
 			}
 		}
 	}
+	
 	/**
 	 * DUVIDA -- DELETAR PASSARA PARAMETRO PESSOA OU IDENTIFICACAO
 	 * @param identificacao
@@ -56,19 +62,21 @@ public class Comercial {
 	 * @return void
 	 */
 	public void deletarPessoa(String identificacao) throws SisComException {
-		boolean deletar = getPessoa().remove(consultarCliente(identificacao));
-		
+		boolean deletar = getListaPessoa().remove(consultarCliente(identificacao));
+		if (!deletar) {
+			throw new SisComException("Erro ao deletar");
+		}
 	}
 
 	/**
 	 * 	 
 	 * @author Joao Vitor Franco Resende
 	 * @param  cpf
-	 * @return pessoa
+	 * @return pessoa //ta pronto nao joao
 	 * @throws SisComException
 	 */
 	public Pessoa consultarCliente(String cpf) throws SisComException{
-		for (Pessoa pessoa : getPessoa()) {
+		for (Pessoa pessoa : getListaPessoa()) {
 			if (cpf.equals(((Cliente) pessoa).getCpf())) {
 				return pessoa;
 			}
@@ -83,8 +91,9 @@ public class Comercial {
 	 * @return pessoa
 	 * @throws SisComException
 	 */
+	
 	public Pessoa validaPessoa(Pessoa pessoaParam) throws SisComException {
-		for (Pessoa pessoa : pessoa) {
+		for (Pessoa pessoa : listaPessoa) {
 			if (pessoa instanceof Vendedor && pessoaParam instanceof Vendedor) {
 				if (((Vendedor) pessoaParam).getCnpj().equals(((Vendedor) pessoa).getCnpj())) {
 					return pessoa;
@@ -103,36 +112,36 @@ public class Comercial {
 		throw new SisComException("Falha ao cadastrar pessoa");
 	}
 
-	public ArrayList<Produto> getProduto() {
-		return produto;
+
+	public ArrayList<Pessoa> getListaPessoa() {
+		return listaPessoa;
 	}
 
-	public void setProduto(ArrayList<Produto> produto) {
-		this.produto = produto;
+	public void setListaPessoa(ArrayList<Pessoa> listaPessoa) {
+		this.listaPessoa = listaPessoa;
 	}
 
-	public ArrayList<Pessoa> getPessoa() {
-		return pessoa;
+	public ArrayList<Produto> getListaProduto() {
+		return listaProduto;
 	}
 
-	public void setPessoa(ArrayList<Pessoa> pessoa) {
-		this.pessoa = pessoa;
+	public void setListaProduto(ArrayList<Produto> listaProduto) {
+		this.listaProduto = listaProduto;
 	}
 
-	public ArrayList<ItemCompra> getItemCompra() {
-		return itemCompra;
+	public ArrayList<ItemCompra> getListaItemCompra() {
+		return listaItemCompra;
 	}
 
-	public void setItemCompra(ArrayList<ItemCompra> itemCompra) {
-		this.itemCompra = itemCompra;
+	public void setListaItemCompra(ArrayList<ItemCompra> listaItemCompra) {
+		this.listaItemCompra = listaItemCompra;
 	}
 
-	public ArrayList<ItemVenda> getItemVenda() {
-		return itemVenda;
+	public ArrayList<ItemVenda> getListaItemVenda() {
+		return listaItemVenda;
 	}
 
-	public void setItemVenda(ArrayList<ItemVenda> itemVenda) {
-		this.itemVenda = itemVenda;
+	public void setListaItemVenda(ArrayList<ItemVenda> listaItemVenda) {
+		this.listaItemVenda = listaItemVenda;
 	}
-
 }
