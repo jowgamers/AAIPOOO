@@ -103,7 +103,7 @@ public class Comercial {
 					return pessoa;
 				}
 			} else if (pessoa instanceof Fornecedor && pessoaParam instanceof Fornecedor) {
-				if (((Cliente) pessoaParam).getCpf().equals(((Cliente) pessoa).getCpf())) {
+				if (((Fornecedor) pessoaParam).getCnpj().equals(((Fornecedor) pessoa).getCnpj())) {
 					return pessoa;
 				}
 			}

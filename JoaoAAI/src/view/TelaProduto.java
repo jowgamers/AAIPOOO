@@ -1,38 +1,54 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.Point;
+import java.awt.SystemColor;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class TelaProduto extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-
 	/**
 	 * Create the panel.
 	 */
 	public TelaProduto() {
 
 		setBackground(new Color(102, 205, 170));
-		setBounds(86, 0, 670, 516);
+		setBounds(0, 0, 825, 555);
 		setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(50, 79, 148, 20);
-		add(textField);
-		textField.setColumns(10);
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setLocation(new Point(500, 300));
+		tabbedPane.setForeground(Color.WHITE);
+		tabbedPane.setBounds(0, 60, 825, 495);
+		add(tabbedPane);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(50, 110, 148, 20);
-		add(textField_1);
+		JPanel panel_1 = new JPanel();
+		tabbedPane.addTab("Deletar", null, panel_1, null);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(50, 141, 148, 20);
-		add(textField_2);
+		JPanel panel_2 = new JPanel();
+		tabbedPane.addTab("Consultar", null, panel_2, null);
+		
+		JPanel panel_3 = new JPanel();
+		tabbedPane.addTab("Imprimir", null, panel_3, null);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(32, 178, 170));
+		panel.setForeground(Color.WHITE);
+		tabbedPane.addTab("Cadastrar", null, panel, null);
+		
+		JLabel lblClientes = new JLabel("Produto");
+		lblClientes.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblClientes.setHorizontalAlignment(SwingConstants.CENTER);
+		lblClientes.setForeground(Color.WHITE);
+		lblClientes.setFont(new Font("Tahoma", Font.PLAIN, 31));
+		lblClientes.setBounds(0, 11, 203, 45);
+		add(lblClientes);
 	}
 
 }
