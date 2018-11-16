@@ -16,7 +16,7 @@ public class TelaCliente extends JPanel {
 	 */
 	public TelaCliente() {
 
-		setBackground(new Color(47, 79, 79));
+		setBackground(new Color(48, 50, 61));
 		setBounds(0, 0, 825, 555);
 		setLayout(null);
 		

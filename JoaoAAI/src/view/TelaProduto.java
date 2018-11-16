@@ -18,7 +18,7 @@ public class TelaProduto extends JPanel {
 	 */
 	public TelaProduto() {
 
-		setBackground(new Color(102, 205, 170));
+		setBackground(new Color(48, 50, 61));
 		setBounds(0, 0, 825, 555);
 		setLayout(null);
 		

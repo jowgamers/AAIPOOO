@@ -17,7 +17,7 @@ public class TelaFornecedor extends JPanel {
 	 * Create the panel.
 	 */
 	public TelaFornecedor() {
-		setBackground(new Color(128, 0, 0));
+		setBackground(new Color(48, 50, 61));
 		setBounds(0, 0, 825, 555);
 		setLayout(null);
 		
