@@ -21,8 +21,7 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
 
-import connection.ConnectionManager; //Conexão
-
+//import connection.ConnectionManager; //Conexão
 
 public class TelaPrincipal extends JFrame {
 
@@ -38,17 +37,18 @@ public class TelaPrincipal extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		
+
 		try {
-		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-		        if ("Nimbus".equals(info.getName())) {
-		            UIManager.setLookAndFeel(info.getClassName());
-		            break;
-		        }
-		    }
+			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
 		} catch (Exception e) {
-		    // If Nimbus is not available, you can set the GUI to another look and feel.
+			// Excessão para se não achar a nimbus posso colocar outra laF
 		}
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -59,30 +59,27 @@ public class TelaPrincipal extends JFrame {
 				}
 			}
 		});
-		
-		//Fazer a conexão com o banco de dados
-		try {
-			ConnectionManager.getMysqlConnection();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
+
+		/*
+		 * //Fazer a conexão com o banco de dados try {
+		 * ConnectionManager.getMysqlConnection(); } catch (SQLException e) {
+		 * e.printStackTrace(); }
+		 */
+
 	}
 
 	public TelaPrincipal() {
 		setResizable(false);
-		 setUndecorated(true); // Tirar a borda
-		 setLocationRelativeTo(null); //Nem ideia
+		setUndecorated(true); // Tirar a 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(200, 200, 980, 580); // Aparentemente é onde vai abrir a JFrame os 2 1
+		setBounds(0, 0, 980, 580); // Aparentemente é onde vai abrir a JFrame os 2 1borda, usar 0 e 0 pois no metodo a baixo ele centraliza
+		setLocationRelativeTo(null); // Centralizar a tela na hora de abrir
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(48, 50, 61));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		
-		
 		JPanel panel = new JPanel();
 		panel.setBorder(null);
 		panel.setBackground(new java.awt.Color(77, 80, 97)); // AZUL ESCURO
@@ -126,19 +123,19 @@ public class TelaPrincipal extends JFrame {
 		panel.add(btnProd);
 		btnProd.setContentAreaFilled(false);
 
-		//testar
+		// testar
 		JButton btnInicial = new JButton("");
-		//btnInicial.setMargin(new Insets(0, 0, 0, 0));
+		// btnInicial.setMargin(new Insets(0, 0, 0, 0));
 		btnInicial.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/imagens/inicio.png")));
 		btnInicial.setRolloverIcon(new ImageIcon(TelaPrincipal.class.getResource("/imagens/iniciohvr.png")));
 		btnInicial.setFocusable(false);
 		btnInicial.setContentAreaFilled(false);
 		btnInicial.setForeground(Color.WHITE);
-		//btnInicial.setHorizontalAlignment(SwingConstants.LEFT);
-		//btnInicial.setHorizontalTextPosition(SwingConstants.LEFT);
+		// btnInicial.setHorizontalAlignment(SwingConstants.LEFT);
+		// btnInicial.setHorizontalTextPosition(SwingConstants.LEFT);
 		btnInicial.setBounds(0, 133, 155, 35);
 		panel.add(btnInicial);
-		
+
 		JLabel lblNome = new JLabel("NOME");
 		lblNome.setBounds(59, 66, 37, 14);
 		panel.add(lblNome);
@@ -156,95 +153,94 @@ public class TelaPrincipal extends JFrame {
 		layeredPane.setBounds(0, 0, 825, 555);
 		panelInicial.add(layeredPane);
 		layeredPane.setLayout(null);
-		
-		
+
 		JPanel panelPrinc = new JPanel();
 		panelPrinc.setBounds(0, 0, 825, 555);
 		layeredPane.add(panelPrinc);
 		panelPrinc.setBackground(new Color(48, 50, 61));
 		panelPrinc.setLayout(null);
-		
+
 		JLabel lblClientes = new JLabel("Clientes");
 		lblClientes.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblClientes.setForeground(Color.WHITE);
 		lblClientes.setBounds(284, 105, 46, 14);
 		panelPrinc.add(lblClientes);
-		
+
 		JLabel lblVendedores = new JLabel("Vendedores");
 		lblVendedores.setForeground(Color.WHITE);
 		lblVendedores.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblVendedores.setBounds(63, 105, 68, 14);
 		panelPrinc.add(lblVendedores);
-		
+
 		JLabel lblFornecedores = new JLabel("Fornecedores");
 		lblFornecedores.setForeground(Color.WHITE);
 		lblFornecedores.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblFornecedores.setBounds(688, 105, 78, 14);
 		panelPrinc.add(lblFornecedores);
-		
+
 		JLabel lblProdutos = new JLabel("Produtos");
 		lblProdutos.setForeground(Color.WHITE);
 		lblProdutos.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblProdutos.setBounds(492, 105, 50, 14);
 		panelPrinc.add(lblProdutos);
-		
+
 		JLabel lblNewLabel = new JLabel("2");
 		lblNewLabel.setForeground(SystemColor.desktop);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblNewLabel.setBounds(300, 71, 15, 34);
 		panelPrinc.add(lblNewLabel);
-		
+
 		JLabel label = new JLabel("2");
 		label.setForeground(SystemColor.desktop);
 		label.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		label.setBounds(90, 71, 15, 34);
 		panelPrinc.add(label);
-		
+
 		JLabel label_1 = new JLabel("2");
 		label_1.setForeground(SystemColor.desktop);
 		label_1.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		label_1.setBounds(720, 71, 15, 34);
 		panelPrinc.add(label_1);
-		
+
 		JLabel label_2 = new JLabel("2");
 		label_2.setForeground(SystemColor.desktop);
 		label_2.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		label_2.setBounds(510, 71, 15, 34);
 		panelPrinc.add(label_2);
-		
+
 		JLabel lblLogo = new JLabel("LOGO");
 		lblLogo.setBounds(274, 156, 277, 242);
 		panelPrinc.add(lblLogo);
 		lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
-				
-				JLabel lbl_fechar = new JLabel("X");
-				lbl_fechar.setBounds(944, 2, 34, 27);
-				contentPane.add(lbl_fechar);
-				lbl_fechar.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent arg0) {
-						
-						System.exit(0);
-					}
-				});
-				lbl_fechar.setHorizontalAlignment(SwingConstants.CENTER);
-				lbl_fechar.setForeground(new Color(224, 255, 255));
-				lbl_fechar.setFont(new Font("Tahoma", Font.BOLD, 18));
-				
-						JLabel lbl_mini = new JLabel("-");
-						lbl_mini.setBounds(909, -1, 34, 27);
-						contentPane.add(lbl_mini);
-						lbl_mini.setHorizontalTextPosition(SwingConstants.CENTER);
-						lbl_mini.addMouseListener(new MouseAdapter() {
-							@Override
-							public void mouseClicked(MouseEvent arg0) {
-							
-								setState(ICONIFIED);
-							}
-						});
-						lbl_mini.setHorizontalAlignment(SwingConstants.CENTER);
-						lbl_mini.setForeground(new Color(224, 255, 255));
-						lbl_mini.setFont(new Font("Tahoma", Font.PLAIN, 30));
+
+		JLabel lbl_fechar = new JLabel("X");
+		lbl_fechar.setBounds(944, 2, 34, 27);
+		contentPane.add(lbl_fechar);
+		lbl_fechar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+
+				System.exit(0);
+			}
+		});
+		lbl_fechar.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_fechar.setForeground(new Color(224, 255, 255));
+		lbl_fechar.setFont(new Font("Tahoma", Font.BOLD, 18));
+
+		JLabel lbl_mini = new JLabel("-");
+		lbl_mini.setBounds(909, -1, 34, 27);
+		contentPane.add(lbl_mini);
+		lbl_mini.setHorizontalTextPosition(SwingConstants.CENTER);
+		lbl_mini.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+
+				setState(ICONIFIED);
+			}
+		});
+		lbl_mini.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_mini.setForeground(new Color(224, 255, 255));
+		lbl_mini.setFont(new Font("Tahoma", Font.PLAIN, 30));
 
 		/**
 		 * Botões para a troca de telas
