@@ -21,12 +21,14 @@ public class TelaCliente extends JPanel {
 		setLayout(null);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setLocation(new Point(500, 300));
-		tabbedPane.setForeground(Color.WHITE);
+		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+		tabbedPane.setBackground(Color.GRAY);
+		tabbedPane.setForeground(Color.DARK_GRAY);
 		tabbedPane.setBounds(0, 60, 825, 495);
 		add(tabbedPane);
 		
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(48, 50, 61));
 		tabbedPane.addTab("Deletar", null, panel_1, null);
 		
 		JPanel panel_2 = new JPanel();

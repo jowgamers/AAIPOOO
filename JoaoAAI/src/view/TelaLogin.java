@@ -25,8 +25,13 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
+import controller.ProdutoDAO;
 import controller.UsuarioDAO;
+import model.Produto;
+import model.Usuario;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -91,8 +96,8 @@ public class TelaLogin extends JFrame {
 		mntmComoCadastrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				//JOptionPane.showMessageDialog(null, "\n\n Para efetuar o cadastro, peça ao "
-				//		+ "\ngerente responsável abra uma demanda\n\n", "Como cadastrar"); //Manipular melhor a tela
+				JOptionPane.showMessageDialog(null, "\n\n Para efetuar o cadastro, peça ao "
+						+ "\ngerente responsável abra uma demanda\n\n", "Como cadastrar", JOptionPane.QUESTION_MESSAGE); //Manipular melhor a tela
 			}
 		});
 		mnOpes.add(mntmComoCadastrar);
@@ -131,8 +136,11 @@ public class TelaLogin extends JFrame {
 				UsuarioDAO uDAO = new UsuarioDAO();
 				if(uDAO.confereLogin(txtMatricula.getText(), new String (txtSenha.getPassword()))) { //Conferir se o String vai funcionar
 					
-					JOptionPane.showMessageDialog(null, "Bem vindo ao sistema " +txtMatricula.getText()); //Manipular melhor a tela
+					JOptionPane.showMessageDialog(null, "Bem vindo ao sistema " +lerJTablePorNome(txtMatricula.getText())); //Manipular melhor a tela
 					
+					TelaPrincipal telaSist = new TelaPrincipal();
+					telaSist.setVisible(true);
+					setVisible(false);
 				} else {
 					JOptionPane.showMessageDialog(null, "Dados invalidos", "Erro", JOptionPane.ERROR_MESSAGE);  //Manipular melhor a tela
 					
@@ -154,6 +162,17 @@ public class TelaLogin extends JFrame {
 		btnFechar.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnFechar.setBounds(532, 312, 102, 34);
 		contentPane.add(btnFechar);
+	}
+	
+	public String lerJTablePorNome(String matricula) {
+		UsuarioDAO uDAO = new UsuarioDAO();
+
+		for (Usuario u : uDAO.buscaNomePorMatricula(matricula)) {
+			return u.getNome();
+
+		}
+		
+		return null;
 	}
 	
 }

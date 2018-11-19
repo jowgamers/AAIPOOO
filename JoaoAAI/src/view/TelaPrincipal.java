@@ -21,6 +21,8 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
 
+import connection.ConnectionManager;
+
 //import connection.ConnectionManager; //Conexão
 
 public class TelaPrincipal extends JFrame {
@@ -60,19 +62,21 @@ public class TelaPrincipal extends JFrame {
 			}
 		});
 
-		/*
-		 * //Fazer a conexão com o banco de dados try {
-		 * ConnectionManager.getMysqlConnection(); } catch (SQLException e) {
-		 * e.printStackTrace(); }
-		 */
+		// Fazer a conexão com o banco de dados
+		try {
+			ConnectionManager.getMysqlConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 	}
 
 	public TelaPrincipal() {
 		setResizable(false);
-		setUndecorated(true); // Tirar a 
+		setUndecorated(true); // Tirar a
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, 980, 580); // Aparentemente é onde vai abrir a JFrame os 2 1borda, usar 0 e 0 pois no metodo a baixo ele centraliza
+		setBounds(0, 0, 980, 580); // Aparentemente é onde vai abrir a JFrame os 2 1borda, usar 0 e 0 pois no
+									// metodo a baixo ele centraliza
 		setLocationRelativeTo(null); // Centralizar a tela na hora de abrir
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(48, 50, 61));
