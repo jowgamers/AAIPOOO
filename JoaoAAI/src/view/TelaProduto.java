@@ -186,7 +186,7 @@ public class TelaProduto extends JPanel {
 		consultarPanel.add(btnPesquisar);
 
 		DefaultTableModel modelo = (DefaultTableModel) jTProd.getModel();
-		lerJTable();
+		//lerJTable();
 
 		JPanel cadastrarPanel = new JPanel();
 		cadastrarPanel.setBackground(new Color(32, 178, 170));

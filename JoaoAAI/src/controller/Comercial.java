@@ -95,7 +95,7 @@ public class Comercial {
 	public Pessoa validaPessoa(Pessoa pessoaParam) throws SisComException {
 		for (Pessoa pessoa : listaPessoa) {
 			if (pessoa instanceof Vendedor && pessoaParam instanceof Vendedor) {
-				if (((Vendedor) pessoaParam).getCnpj().equals(((Vendedor) pessoa).getCnpj())) {
+				if (((Vendedor) pessoaParam).getCpf().equals(((Vendedor) pessoa).getCpf())) {
 					return pessoa;
 				}
 			} else if (pessoa instanceof Cliente && pessoaParam instanceof Cliente) {

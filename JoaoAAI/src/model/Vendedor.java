@@ -3,7 +3,7 @@ package model;
 public class Vendedor extends Pessoa{
 	
 	//
-	private String cnpj;
+	private String cpf;
 	private double metaMensal;
 	//
 	
@@ -11,30 +11,35 @@ public class Vendedor extends Pessoa{
 		
 	}
 	
-	public Vendedor(String cnpj, double metaMensal) {
+	public Vendedor(String cpf, double metaMensal) {
 		super();
-		this.cnpj = cnpj;
+		this.cpf = cpf;
 		this.metaMensal = metaMensal;
 	}
 	
 	//
-	public String getCnpj() {
-		return cnpj;
-	}
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
-	}
-	public double getNomeContato() {
+
+	
+	public double getMetaMensal() {
 		return metaMensal;
 	}
-	public void setNomeContato(double metaMensal) {
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public void setMetaMensal(double metaMensal) {
 		this.metaMensal = metaMensal;
 	}
-	
+
 	//
 	@Override
 	public String toString() {
-		return "Vendedor [cnpj=" + cnpj + ", nomeContato=" + metaMensal + "]";
+		return "Vendedor [cnpj=" + cpf + ", nomeContato=" + metaMensal + "]";
 	}
 	
 	

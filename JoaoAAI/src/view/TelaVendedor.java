@@ -1,27 +1,50 @@
 package view;
+/*
+cod_vnd INT
+dta_cad_vnd STRING
+
+nom_vnd STRING
+cpf_vnd ST
+tel_vnd ST
+eml_vnd ST
+mta_mes_vnd DB
+*/
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Point;
-import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.SwingConstants;
-import java.awt.CardLayout;
-import java.awt.GridLayout;
-import java.awt.BorderLayout;
-import javax.swing.BoxLayout;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
+
+import controller.ProdutoDAO;
+import controller.UsuarioDAO;
+import controller.VendedorDAO;
+import model.Vendedor;
 
 public class TelaVendedor extends JPanel {
-	private JTextField textField_1;
-	private JTextField textField;
-	private JTextField txtEmail;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField txtNomeVend;
+	private JTextField txtTelVend;
+	private JTextField txtEmlVnd;
+	private JTextField txtMetaMensal;
+	private JTextField txtCpfVnd;
+	private JTable jTVend;
+	private JTextField txtCNome;
+	private JTextField txtCCpf;
+	private JTextField txtCTel;
+	private JTextField txtCEmail;
+	private JTextField txtCMetaMes;
 
 	/**
 	 * Create the panel.
@@ -37,72 +60,221 @@ public class TelaVendedor extends JPanel {
 		tabbedPane.setBounds(0, 60, 825, 495);
 		add(tabbedPane);
 		
-		JPanel panel_1 = new JPanel();
-		tabbedPane.addTab("Deletar", null, panel_1, null);
-		panel_1.setLayout(null);
+		JPanel pnlConsultar = new JPanel();
+		tabbedPane.addTab("Deletar", null, pnlConsultar, null);
+		pnlConsultar.setLayout(null);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(50, 128, 179, 26);
-		panel_1.add(textField_1);
+
+		JButton btnAtualizar = new JButton("Atualizar");
+		btnAtualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (jTVend.getSelectedRow() != -1) {
+
+					Vendedor v = new Vendedor();
+					VendedorDAO vDAO = new VendedorDAO();
+					v.setNome(txtCNome.getText());
+					v.setCpf(txtCCpf.getText());
+					v.setEmail(txtCEmail.getText());
+					v.setMetaMensal(Double.parseDouble(txtCMetaMes.getText()));
+					v.setTelefones(txtCTel.getText());
+					v.setCodigo((int) jTVend.getValueAt(jTVend.getSelectedRow(), 0));
+					
+					vDAO.update(v);
+
+					txtNomeVend.setText("");
+					txtCpfVnd.setText("");
+					txtTelVend.setText("");
+					txtEmlVnd.setText("");
+
+					lerJTable();
+
+				} // Colocar um else (selecione um produto p excluir em um optionpanel
+			}
+		});
+		btnAtualizar.setBounds(675, 25, 75, 23);
+		pnlConsultar.add(btnAtualizar);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(120, 180, 179, 26);
-		panel_1.add(textField);
 		
-		txtEmail = new JTextField();
-		txtEmail.setText("Texto");
-		txtEmail.setToolTipText("");
-		txtEmail.setColumns(10);
-		txtEmail.setBounds(50, 256, 179, 26);
-		panel_1.add(txtEmail);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 88, 800, 368);
+		pnlConsultar.add(scrollPane);
+
 		
-		JLabel lblNewLabel = new JLabel("Nome :");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel.setBounds(50, 103, 45, 14);
-		panel_1.add(lblNewLabel);
+		jTVend = new JTable();
+		jTVend.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+
+				if (jTVend.getSelectedRow() != -1) {
+					
+					txtCNome.setText(jTVend.getValueAt(jTVend.getSelectedRow(), 1).toString());
+					txtCTel.setText(jTVend.getValueAt(jTVend.getSelectedRow(), 2).toString());
+					txtCCpf.setText(jTVend.getValueAt(jTVend.getSelectedRow(), 3).toString());
+					txtCEmail.setText(jTVend.getValueAt(jTVend.getSelectedRow(), 4).toString());
+					txtCMetaMes.setText(jTVend.getValueAt(jTVend.getSelectedRow(), 6).toString());
+
+				}
+			}
+		});
+		jTVend.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Codigo Vendedor", "Nome", "Telefone", "Cpf", "Email", "Data Cadastro", "Meta Mensal"
+			}
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		scrollPane.setViewportView(jTVend);
+		
+		txtCNome = new JTextField();
+		txtCNome.setBounds(9, 25, 150, 29);
+		pnlConsultar.add(txtCNome);
+		txtCNome.setColumns(10);
+		
+		JLabel lblNome = new JLabel("Nome : ");
+		lblNome.setBounds(10, 11, 46, 14);
+		pnlConsultar.add(lblNome);
+		
+		JLabel lblCpf = new JLabel("CPF : ");
+		lblCpf.setBounds(170, 11, 46, 14);
+		pnlConsultar.add(lblCpf);
+		
+		txtCCpf = new JTextField();
+		txtCCpf.setColumns(10);
+		txtCCpf.setBounds(169, 25, 150, 29);
+		pnlConsultar.add(txtCCpf);
 		
 		JLabel lblTelefone = new JLabel("Telefone :");
-		lblTelefone.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblTelefone.setBounds(60, 184, 60, 14);
-		panel_1.add(lblTelefone);
+		lblTelefone.setBounds(330, 11, 59, 14);
+		pnlConsultar.add(lblTelefone);
 		
-		JLabel lblEmail = new JLabel("E-mail :");
-		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblEmail.setBounds(50, 231, 45, 14);
-		panel_1.add(lblEmail);
+		txtCTel = new JTextField();
+		txtCTel.setColumns(10);
+		txtCTel.setBounds(329, 25, 94, 29);
+		pnlConsultar.add(txtCTel);
 		
-		JLabel lblCnpj = new JLabel("Cnpj : ");
-		lblCnpj.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblCnpj.setBounds(50, 293, 45, 17);
-		panel_1.add(lblCnpj);
+		JLabel lblEmail = new JLabel("Email :");
+		lblEmail.setBounds(434, 11, 59, 14);
+		pnlConsultar.add(lblEmail);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(50, 321, 179, 26);
-		panel_1.add(textField_3);
+		txtCEmail = new JTextField();
+		txtCEmail.setColumns(10);
+		txtCEmail.setBounds(433, 25, 128, 29);
+		pnlConsultar.add(txtCEmail);
 		
-		JLabel lblMetaMensal = new JLabel("Meta Mensal : ");
-		lblMetaMensal.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblMetaMensal.setBounds(50, 358, 86, 14);
-		panel_1.add(lblMetaMensal);
+		JLabel lblMetaMs = new JLabel("Meta M\u00EAs : ");
+		lblMetaMs.setBounds(572, 11, 75, 14);
+		pnlConsultar.add(lblMetaMs);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(50, 383, 179, 26);
-		panel_1.add(textField_4);
+		txtCMetaMes = new JTextField();
+		txtCMetaMes.setColumns(10);
+		txtCMetaMes.setBounds(571, 25, 94, 29);
+		pnlConsultar.add(txtCMetaMes);
 		
-		JPanel panel_2 = new JPanel();
-		tabbedPane.addTab("Consultar", null, panel_2, null);
+		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (jTVend.getSelectedRow() != -1) {
+
+					Vendedor v = new Vendedor();
+					VendedorDAO vDAO = new VendedorDAO();
+
+					v.setCodigo((int) jTVend.getValueAt(jTVend.getSelectedRow(), 0));
+
+					vDAO.delete(v);
+
+					txtNomeVend.setText("");
+					txtCpfVnd.setText("");
+					txtTelVend.setText("");
+					txtEmlVnd.setText("");
+
+					//lerJTable();
+				} // Colocar um else (selecione um produto p excluir em um optionpanel
+			}
+		});
+		btnExcluir.setBounds(675, 54, 75, 23);
+		pnlConsultar.add(btnExcluir);
 		
-		JPanel panel_3 = new JPanel();
-		tabbedPane.addTab("Imprimir", null, panel_3, null);
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(32, 178, 170));
-		panel.setForeground(Color.WHITE);
-		tabbedPane.addTab("Cadastrar", null, panel, null);
+		JPanel lblCadastrar = new JPanel();
+		tabbedPane.addTab("Consultar", null, lblCadastrar, null);
+		lblCadastrar.setLayout(null);
+		
+		txtNomeVend = new JTextField();
+		txtNomeVend.setBounds(41, 56, 174, 29);
+		lblCadastrar.add(txtNomeVend);
+		txtNomeVend.setColumns(10);
+		
+		JLabel lblNomeVendedor = new JLabel("Nome Vendedor : ");
+		lblNomeVendedor.setBounds(41, 31, 107, 14);
+		lblCadastrar.add(lblNomeVendedor);
+		
+		JLabel lblTelefoneVendedor = new JLabel("Telefone Vendedor: ");
+		lblTelefoneVendedor.setBounds(41, 161, 145, 14);
+		lblCadastrar.add(lblTelefoneVendedor);
+		
+		txtTelVend = new JTextField();
+		txtTelVend.setColumns(10);
+		txtTelVend.setBounds(41, 186, 174, 29);
+		lblCadastrar.add(txtTelVend);
+		
+		JLabel lblEmailVendedor = new JLabel("Email Vendedor :");
+		lblEmailVendedor.setBounds(41, 226, 97, 14);
+		lblCadastrar.add(lblEmailVendedor);
+		
+		txtEmlVnd = new JTextField();
+		txtEmlVnd.setColumns(10);
+		txtEmlVnd.setBounds(41, 251, 174, 29);
+		lblCadastrar.add(txtEmlVnd);
+		
+		JLabel lblMetaMensal_1 = new JLabel("Meta Mensal : ");
+		lblMetaMensal_1.setBounds(41, 291, 97, 14);
+		lblCadastrar.add(lblMetaMensal_1);
+		
+		txtMetaMensal = new JTextField();
+		txtMetaMensal.setColumns(10);
+		txtMetaMensal.setBounds(41, 316, 174, 29);
+		lblCadastrar.add(txtMetaMensal);
+		
+		JButton btnNewButton = new JButton("Cadastrar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				Vendedor v = new Vendedor();
+				VendedorDAO vDAO = new VendedorDAO();
+				
+				v.setNome(txtNomeVend.getText());
+				v.setCpf(txtCpfVnd.getText());
+				v.setTelefones(txtTelVend.getText());
+				v.setEmail(txtEmlVnd.getText());
+				v.setMetaMensal(Double.parseDouble(txtMetaMensal.getText()));
+				vDAO.create(v);
+
+				txtNomeVend.setText("");
+				txtCpfVnd.setText("");
+				txtTelVend.setText("");
+				txtEmlVnd.setText("");
+
+				//lerJTable();
+			}
+		});
+		btnNewButton.setBounds(41, 356, 97, 29);
+		lblCadastrar.add(btnNewButton);
+		
+		txtCpfVnd = new JTextField();
+		txtCpfVnd.setColumns(10);
+		txtCpfVnd.setBounds(41, 121, 174, 29);
+		lblCadastrar.add(txtCpfVnd);
+		
+		JLabel lblCpfVendedor = new JLabel("Cpf Vendedor : ");
+		lblCpfVendedor.setBounds(41, 96, 145, 14);
+		lblCadastrar.add(lblCpfVendedor);
 		
 		JLabel lblClientes = new JLabel("Vendedor");
 		lblClientes.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -113,5 +285,32 @@ public class TelaVendedor extends JPanel {
 		add(lblClientes);
 		
 		
+	}
+	
+	
+	public void lerJTable() {
+		DefaultTableModel modelo = (DefaultTableModel) jTVend.getModel();
+		modelo.setNumRows(0);
+		VendedorDAO vDAO = new VendedorDAO();
+
+		for (Vendedor v : vDAO.read()) {
+			modelo.addRow(new Object[] { v.getCodigo(), v.getNome(), v.getTelefones(), v.getCpf(), v.getEmail(), v.getDataCad(), v.getMetaMensal()
+
+			});
+		}
+
+	}
+	
+	public void lerJTablePorNome(String nomeVend) {
+		DefaultTableModel modelo = (DefaultTableModel) jTVend.getModel();
+		modelo.setNumRows(0);
+		VendedorDAO vDAO = new VendedorDAO();
+
+		for (Vendedor v : vDAO.buscaPorNome(nomeVend)) {
+			modelo.addRow(new Object[] { v.getCodigo(), v.getNome(), v.getTelefones(), v.getCpf(), v.getEmail(), v.getDataCad(), v.getMetaMensal()
+
+			});
+		}
+
 	}
 }
