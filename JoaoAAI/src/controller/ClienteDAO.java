@@ -34,8 +34,8 @@ public class ClienteDAO {
 			stmt.setString(1, c.getNome());
 			stmt.setString(2, c.getTelefones());
 			stmt.setString(3, c.getEmail());
-			stmt.setString(5, c.getCpf());
-			stmt.setDouble(6, c.getLimiteCredito());
+			stmt.setString(4, c.getCpf());
+			stmt.setDouble(5, c.getLimiteCredito());
 			stmt.executeUpdate();
 
 			JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso", "Acões BD",

@@ -183,7 +183,7 @@ public class TelaFornecedor extends JPanel {
 					txtTelFrn.setText("");
 					txtEmlVnd.setText("");
 
-					//lerJTable();
+					lerJTable();
 				} // Colocar um else (selecione um produto p excluir em um optionpanel
 			}
 		});
@@ -250,11 +250,15 @@ public class TelaFornecedor extends JPanel {
 				txtTelFrn.setText("");
 				txtEmlVnd.setText("");
 
-				//lerJTable();
+				lerJTable();
 			}
 		});
 		btnNewButton.setBounds(41, 356, 97, 29);
 		lblCadastrar.add(btnNewButton);
+		
+		
+		DefaultTableModel modelo = (DefaultTableModel) jTFor.getModel();
+		lerJTable();
 		
 		txtCpfFrn = new JTextField();
 		txtCpfFrn.setColumns(10);

@@ -35,7 +35,7 @@ public class VendedorDAO {
 			stmt.setString(2, v.getTelefones());
 			stmt.setString(3, v.getCpf());
 			stmt.setString(4, v.getEmail());
-			stmt.setDouble(6, v.getMetaMensal());
+			stmt.setDouble(5, v.getMetaMensal());
 
 			stmt.executeUpdate();
 

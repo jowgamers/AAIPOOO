@@ -32,8 +32,7 @@ public class ProdutoDAO {
 					"INSERT INTO produtos (nome_prod, vlr_unid, qnt_estoq, qnt_estoq_min, data_cad) VALUES (?,?,?,?,NOW()) "); // Com
 																																// a
 																																// data
-			// stmt = con.prepareStatement("INSERT INTO produtos (nome_prod, vlr_unid,
-			// qnt_estoq, qnt_estoq_min) VALUES (?,?,?,?) ");
+
 			stmt.setString(1, p.getNome());
 			stmt.setDouble(2, p.getPrecoUnitario());
 			stmt.setInt(3, p.getEstoque());

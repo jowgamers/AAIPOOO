@@ -194,7 +194,7 @@ public class TelaVendedor extends JPanel {
 					txtTelVend.setText("");
 					txtEmlVnd.setText("");
 
-					//lerJTable();
+					lerJTable();
 				} // Colocar um else (selecione um produto p excluir em um optionpanel
 			}
 		});
@@ -233,6 +233,9 @@ public class TelaVendedor extends JPanel {
 		txtEmlVnd.setBounds(41, 251, 174, 29);
 		lblCadastrar.add(txtEmlVnd);
 		
+		DefaultTableModel modelo = (DefaultTableModel) jTVend.getModel();
+		lerJTable();
+		
 		JLabel lblMetaMensal_1 = new JLabel("Meta Mensal : ");
 		lblMetaMensal_1.setBounds(41, 291, 97, 14);
 		lblCadastrar.add(lblMetaMensal_1);
@@ -261,7 +264,7 @@ public class TelaVendedor extends JPanel {
 				txtTelVend.setText("");
 				txtEmlVnd.setText("");
 
-				//lerJTable();
+				lerJTable();
 			}
 		});
 		btnNewButton.setBounds(41, 356, 97, 29);

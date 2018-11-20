@@ -36,7 +36,7 @@ public class FornecedorDAO {
 			stmt.setString(2, f.getTelefones());
 			stmt.setString(3, f.getCnpj());
 			stmt.setString(4, f.getEmail());
-			stmt.setString(6, f.getNomeContato());
+			stmt.setString(5, f.getNomeContato());
 
 			stmt.executeUpdate();
 
