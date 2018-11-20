@@ -151,7 +151,7 @@ public class ClienteDAO {
 
 	}
 
-	public List<Cliente> buscaPorNome(String nomeCli) {
+	public List<Cliente> buscaPorCpf(String cpfCli) {
 
 		Connection con = null;
 
@@ -167,8 +167,8 @@ public class ClienteDAO {
 		List<Cliente> listaClientes = new ArrayList<Cliente>();
 
 		try {
-			stmt = con.prepareStatement("SELECT * FROM clientes where cod_cli like ?");
-			stmt.setString(1, "%" + nomeCli + "%");
+			stmt = con.prepareStatement("SELECT * FROM clientes where cpf_cli like ?");
+			stmt.setString(1, "%" + cpfCli + "%");
 			rs = stmt.executeQuery();
 
 			while (rs.next()) {
@@ -190,5 +190,45 @@ public class ClienteDAO {
 		return listaClientes;
 
 	}
+	
+	public List<Cliente> imprimirOrdemAlfabetica() {
+
+		Connection con = null;
+
+		try {
+			con = ConnectionManager.getMysqlConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		List<Cliente> listaClientes = new ArrayList<Cliente>();
+
+		try {
+			stmt = con.prepareStatement("SELECT * FROM clientes ORDER BY nom_cli");
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				Cliente c = new Cliente();
+				c.setCodigo(rs.getInt("cod_cli"));
+				c.setNome(rs.getString("nom_cli"));
+				c.setTelefones(rs.getString("tel_cli"));
+				c.setEmail(rs.getString("eml_cli"));
+				c.setDataCad(rs.getDate("dta_cad_vnd"));
+				c.setCpf(rs.getString("cpf_cli"));
+				c.setLimiteCredito(rs.getDouble("lmt_crd"));
+				
+				listaClientes.add(c);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listaClientes;
+
+	}
+
 
 }

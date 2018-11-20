@@ -153,7 +153,7 @@ public class VendedorDAO {
 
 	}
 
-	public List<Vendedor> buscaPorNome(String nomeVnd) {
+	public List<Vendedor> buscaPorCpf(String cpfVnd) {
 
 		Connection con = null;
 
@@ -169,8 +169,47 @@ public class VendedorDAO {
 		List<Vendedor> listaVendedor = new ArrayList<Vendedor>();
 
 		try {
-			stmt = con.prepareStatement("SELECT * FROM vendedores where nom_vnd like ?");
-			stmt.setString(1, "%" + nomeVnd + "%");
+			stmt = con.prepareStatement("SELECT * FROM vendedores where cpf_vnd like ?");
+			stmt.setString(1, "%" + cpfVnd + "%");
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				Vendedor v = new Vendedor();
+				v.setCodigo(rs.getInt("cod_vnd"));
+				v.setNome(rs.getString("nom_vnd"));
+				v.setTelefones(rs.getString("tel_vnd"));
+				v.setCpf(rs.getString("cpf_vnd"));
+				v.setEmail(rs.getString("eml_vnd"));
+				v.setDataCad(rs.getDate("dta_cad_vnd"));
+				v.setMetaMensal(rs.getDouble("mta_mes_vnd"));
+
+				listaVendedor.add(v);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listaVendedor;
+
+	}
+	
+	public List<Vendedor> imprimirOrdemAlfabetica() {
+
+		Connection con = null;
+
+		try {
+			con = ConnectionManager.getMysqlConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		List<Vendedor> listaVendedor = new ArrayList<Vendedor>();
+
+		try {
+			stmt = con.prepareStatement("SELECT * FROM vendedores ORDER BY nom_vnd");
 			rs = stmt.executeQuery();
 
 			while (rs.next()) {

@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -99,6 +100,7 @@ public class TelaLogin extends JFrame {
 				JOptionPane.showMessageDialog(null, "\n\n Para efetuar o cadastro, peça ao "
 						+ "\ngerente responsável abra uma demanda\n\n", "Como cadastrar", JOptionPane.QUESTION_MESSAGE); //Manipular melhor a tela
 			}
+			
 		});
 		mnOpes.add(mntmComoCadastrar);
 		
@@ -174,5 +176,4 @@ public class TelaLogin extends JFrame {
 		
 		return null;
 	}
-	
 }

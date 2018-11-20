@@ -289,7 +289,10 @@ public class TelaVendedor extends JPanel {
 		
 		
 	}
-	
+	/**
+	 * Metodo popular tabela todos itens
+	 * 
+	 */
 	
 	public void lerJTable() {
 		DefaultTableModel modelo = (DefaultTableModel) jTVend.getModel();
@@ -303,13 +306,17 @@ public class TelaVendedor extends JPanel {
 		}
 
 	}
+	/**
+	 * Metodo popular tabela por CPF
+	 * @param cpfVnd
+	 */
 	
-	public void lerJTablePorNome(String nomeVend) {
+	public void lerJTablePorCpf(String cpfVnd) {
 		DefaultTableModel modelo = (DefaultTableModel) jTVend.getModel();
 		modelo.setNumRows(0);
 		VendedorDAO vDAO = new VendedorDAO();
 
-		for (Vendedor v : vDAO.buscaPorNome(nomeVend)) {
+		for (Vendedor v : vDAO.buscaPorCpf(cpfVnd)) {
 			modelo.addRow(new Object[] { v.getCodigo(), v.getNome(), v.getTelefones(), v.getCpf(), v.getEmail(), v.getDataCad(), v.getMetaMensal()
 
 			});

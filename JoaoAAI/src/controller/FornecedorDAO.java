@@ -154,7 +154,7 @@ public class FornecedorDAO {
 
 	}
 
-	public List<Fornecedor> buscaPorNomeForn(String nomFor) {
+	public List<Fornecedor> buscaPorCnpjFrn(String cnpjFrn) {
 
 		Connection con = null;
 
@@ -170,8 +170,8 @@ public class FornecedorDAO {
 		List<Fornecedor> listaFornecedor = new ArrayList<Fornecedor>();
 
 		try {
-			stmt = con.prepareStatement("SELECT * FROM fornecedores WHERE cod_frn like ?");
-			stmt.setString(1, "%" + nomFor + "%");
+			stmt = con.prepareStatement("SELECT * FROM fornecedores WHERE cnpj_frn like ?"); //Metodo alterado, testar por cnpj
+			stmt.setString(1, "%" + cnpjFrn + "%");
 			rs = stmt.executeQuery();
 
 			while (rs.next()) {
@@ -193,4 +193,44 @@ public class FornecedorDAO {
 		return listaFornecedor;
 
 	}
+	
+	public List<Fornecedor> imprimirOrdemAlfabetica() {
+
+		Connection con = null;
+
+		try {
+			con = ConnectionManager.getMysqlConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		List<Fornecedor> listaFornecedor = new ArrayList<Fornecedor>();
+
+		try {
+			stmt = con.prepareStatement("SELECT * FROM fornecedores ORDER BY nom_frn");
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				Fornecedor f = new Fornecedor();
+				f.setCodigo(rs.getInt("cod_frn"));
+				f.setNome(rs.getString("nom_frn"));
+				f.setTelefones(rs.getString("tel_frn"));
+				f.setCnpj(rs.getString("cnpj_frn"));
+				f.setEmail(rs.getString("eml_frn"));
+				f.setDataCad(rs.getDate("dta_cad_frn"));
+				f.setNomeContato(rs.getString("nom_cto"));
+
+				listaFornecedor.add(f);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listaFornecedor;
+
+	}
+
 }

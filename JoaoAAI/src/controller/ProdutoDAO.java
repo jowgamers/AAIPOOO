@@ -187,5 +187,122 @@ public class ProdutoDAO {
 		return listaProduto;
 
 	}
+	public List<Produto> buscaCod(int codProd) {
 
+		Connection con = null;
+
+		try {
+			con = ConnectionManager.getMysqlConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		List<Produto> listaProduto = new ArrayList<Produto>();
+
+		try {
+			stmt = con.prepareStatement("SELECT * FROM produtos WHERE nome_prod cod_prod ?");
+			stmt.setInt(1, codProd);
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				Produto p = new Produto();
+				p.setCodigo(rs.getInt("cod_prod"));
+				p.setNome(rs.getString("nome_prod"));
+				p.setPrecoUnitario(rs.getDouble("vlr_unid"));
+				p.setEstoque(rs.getInt("qnt_estoq"));
+				p.setEstoqueminimo(rs.getInt("qnt_estoq_min"));
+				p.setDataCad(rs.getDate("data_cad"));
+
+				listaProduto.add(p);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listaProduto;
+
+	}
+
+	
+	public List<Produto> imprimirOrdemAlfabetica() {
+
+		Connection con = null;
+
+		try {
+			con = ConnectionManager.getMysqlConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		List<Produto> listaProduto = new ArrayList<Produto>();
+
+		try {
+			stmt = con.prepareStatement("SELECT * FROM produtos ORDER BY nome_prod");
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				Produto p = new Produto();
+				p.setCodigo(rs.getInt("cod_prod"));
+				p.setNome(rs.getString("nome_prod"));
+				p.setPrecoUnitario(rs.getDouble("vlr_unid"));
+				p.setEstoque(rs.getInt("qnt_estoq"));
+				p.setEstoqueminimo(rs.getInt("qnt_estoq_min"));
+				p.setDataCad(rs.getDate("data_cad"));
+
+				listaProduto.add(p);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listaProduto;
+
+	}
+	/**
+	 * Metodo para imprimir produtos em ordem alfabetico que estão com estoque abaixo do minimo
+	 * @return
+	 */
+	public List<Produto> imprimirProdEstoqAbxMediaAfb() {
+
+		Connection con = null;
+
+		try {
+			con = ConnectionManager.getMysqlConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		List<Produto> listaProduto = new ArrayList<Produto>();
+
+		try {
+			stmt = con.prepareStatement("SELECT * FROM produtos WHERE qnt_estoq < qnt_estoq_min ORDER BY nome_prod");
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				Produto p = new Produto();
+				p.setCodigo(rs.getInt("cod_prod"));
+				p.setNome(rs.getString("nome_prod"));
+				p.setPrecoUnitario(rs.getDouble("vlr_unid"));
+				p.setEstoque(rs.getInt("qnt_estoq"));
+				p.setEstoqueminimo(rs.getInt("qnt_estoq_min"));
+				p.setDataCad(rs.getDate("data_cad"));
+
+				listaProduto.add(p);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listaProduto;
+
+	}
 }

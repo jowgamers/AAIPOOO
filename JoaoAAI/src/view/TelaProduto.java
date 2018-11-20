@@ -15,11 +15,15 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
+import controller.FornecedorDAO;
 import controller.ProdutoDAO;
+import model.Fornecedor;
 import model.Produto;
 import javax.swing.JScrollPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
+import javax.swing.JComboBox;
 
 public class TelaProduto extends JPanel {
 	private JTextField txtNome;
@@ -32,6 +36,7 @@ public class TelaProduto extends JPanel {
 	private JTextField txtCEstoq;
 	private JTextField txtCEstoqMin;
 	private JTextField txtBuscaNome;
+	private JComboBox comboBFrn;
 
 	/**
 	 * Create the panel.
@@ -255,8 +260,19 @@ public class TelaProduto extends JPanel {
 		btnCadastrar.setBounds(67, 375, 89, 23);
 		cadastrarPanel.add(btnCadastrar);
 
-		JPanel panel_3 = new JPanel();
-		tabbedPane.addTab("Imprimir", null, panel_3, null);
+		JPanel pnlCompra = new JPanel();
+		tabbedPane.addTab("Imprimir", null, pnlCompra, null);
+		pnlCompra.setLayout(null);
+		
+		
+		comboBFrn = new JComboBox();
+		comboBFrn.setBounds(182, 48, 136, 20);
+		pnlCompra.add(comboBFrn);
+
+		populaBox();//Metodo não testado
+		
+		JPanel pnlVenda = new JPanel();
+		tabbedPane.addTab("New tab", null, pnlVenda, null);
 
 		JLabel lblClientes = new JLabel("Produto");
 		lblClientes.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -294,4 +310,16 @@ public class TelaProduto extends JPanel {
 		}
 
 	}
+	
+	
+	private void populaBox(){
+		   /*suaJComboBox é uma ilustração para o nome da sua combo box. verifique qual nome está declarado no seu projeto e altere*/
+		   /*caso você não tenha instanciado a classe ainda na sua view, se você for usar essa classe dao em outras partes da view faça no construtor*/
+		     FornecedorDAO frnDAO = new FornecedorDAO();
+		     List<Fornecedor> lista = frnDAO.read();
+		     comboBFrn.addItem("");  
+		     for(int i=0;i<lista.size();i++){
+		    	 comboBFrn.addItem(lista.get(i).getNome());
+		     }
+		}
 }

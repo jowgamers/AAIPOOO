@@ -22,6 +22,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
 
 import connection.ConnectionManager;
+import controller.DAOUtil;
 
 //import connection.ConnectionManager; //Conexão
 
@@ -140,7 +141,7 @@ public class TelaPrincipal extends JFrame {
 		btnInicial.setBounds(0, 133, 155, 35);
 		panel.add(btnInicial);
 
-		JLabel lblNome = new JLabel("NOME");
+		JLabel lblNome = new JLabel("Joao");
 		lblNome.setBounds(59, 66, 37, 14);
 		panel.add(lblNome);
 		lblNome.setForeground(SystemColor.desktop);
@@ -187,30 +188,32 @@ public class TelaPrincipal extends JFrame {
 		lblProdutos.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblProdutos.setBounds(492, 105, 50, 14);
 		panelPrinc.add(lblProdutos);
+		
+		DAOUtil dUtil = new DAOUtil();
+		
+		JLabel lblCli = new JLabel(dUtil.qntdRegis("clientes"));
+		lblCli.setForeground(SystemColor.desktop);
+		lblCli.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		lblCli.setBounds(300, 71, 15, 34);
+		panelPrinc.add(lblCli);
+		
+		JLabel lblVend = new JLabel(dUtil.qntdRegis("vendedores"));
+		lblVend.setForeground(SystemColor.desktop);
+		lblVend.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		lblVend.setBounds(90, 71, 15, 34);
+		panelPrinc.add(lblVend);
 
-		JLabel lblNewLabel = new JLabel("2");
-		lblNewLabel.setForeground(SystemColor.desktop);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		lblNewLabel.setBounds(300, 71, 15, 34);
-		panelPrinc.add(lblNewLabel);
+		JLabel lblFrn = new JLabel(dUtil.qntdRegis("fornecedores"));
+		lblFrn.setForeground(SystemColor.desktop);
+		lblFrn.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		lblFrn.setBounds(720, 71, 15, 34);
+		panelPrinc.add(lblFrn);
 
-		JLabel label = new JLabel("2");
-		label.setForeground(SystemColor.desktop);
-		label.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		label.setBounds(90, 71, 15, 34);
-		panelPrinc.add(label);
-
-		JLabel label_1 = new JLabel("2");
-		label_1.setForeground(SystemColor.desktop);
-		label_1.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		label_1.setBounds(720, 71, 15, 34);
-		panelPrinc.add(label_1);
-
-		JLabel label_2 = new JLabel("2");
-		label_2.setForeground(SystemColor.desktop);
-		label_2.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		label_2.setBounds(510, 71, 15, 34);
-		panelPrinc.add(label_2);
+		JLabel lblProd =new JLabel(dUtil.qntdRegis("produtos"));
+		lblProd.setForeground(SystemColor.desktop);
+		lblProd.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		lblProd.setBounds(510, 71, 15, 34);
+		panelPrinc.add(lblProd);
 
 		JLabel lblLogo = new JLabel("LOGO");
 		lblLogo.setBounds(274, 156, 277, 242);

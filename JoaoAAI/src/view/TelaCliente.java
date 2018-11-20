@@ -308,12 +308,12 @@ public class TelaCliente extends JPanel {
 
 	}
 	
-	public void lerJTablePorNome(String nomeCli) {
+	public void lerJTablePorCpf(String cpfCli) {
 		DefaultTableModel modelo = (DefaultTableModel) jTCli.getModel();
 		modelo.setNumRows(0);
 		ClienteDAO cDAO = new ClienteDAO();
 
-		for (Cliente c : cDAO.buscaPorNome(nomeCli)) {
+		for (Cliente c : cDAO.buscaPorCpf(cpfCli)) {
 			modelo.addRow(new Object[] { c.getCodigo(), c.getNome(), c.getTelefones(), c.getEmail(), c.getDataCad(), c.getCpf(), c.getLimiteCredito()
 
 			});

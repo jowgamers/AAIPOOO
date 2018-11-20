@@ -294,12 +294,12 @@ public class TelaFornecedor extends JPanel {
 
 	}
 	
-	public void lerJTablePorNome(String nomFor) {
+	public void lerJTablePorCnpj(String cnpjFrn) {
 		DefaultTableModel modelo = (DefaultTableModel) jTFor.getModel();
 		modelo.setNumRows(0);
 		FornecedorDAO fDAO = new FornecedorDAO();
 
-		for (Fornecedor f : fDAO.buscaPorNomeForn(nomFor)) {
+		for (Fornecedor f : fDAO.buscaPorCnpjFrn(cnpjFrn)) {
 			modelo.addRow(new Object[] { f.getCodigo(), f.getNome(), f.getTelefones(), f.getCnpj(), f.getEmail(), f.getDataCad(), f.getNomeContato()
 
 			});
