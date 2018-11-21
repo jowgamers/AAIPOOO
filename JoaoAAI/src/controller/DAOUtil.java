@@ -29,8 +29,7 @@ public class DAOUtil {
 
 
 		try {
-			stmt = con.prepareStatement("SELECT COUNT(*) as qntde FROM ?");
-			stmt.setString(1,tabela); 
+			stmt = con.prepareStatement("SELECT COUNT(*) as qntde FROM "+tabela);
 			rs = stmt.executeQuery();
 
 			while (rs.next()) {
