@@ -191,25 +191,29 @@ public class TelaPrincipal extends JFrame {
 		
 		DAOUtil dUtil = new DAOUtil();
 		
-		JLabel lblCli = new JLabel(dUtil.qntdRegis("clientes"));
+		JLabel lblCli =new JLabel("1");
+		//JLabel lblCli = new JLabel(dUtil.qntdRegis("clientes"));
 		lblCli.setForeground(SystemColor.desktop);
 		lblCli.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblCli.setBounds(300, 71, 15, 34);
 		panelPrinc.add(lblCli);
 		
-		JLabel lblVend = new JLabel(dUtil.qntdRegis("vendedores"));
+		JLabel lblVend =new JLabel("1");
+		//JLabel lblVend = new JLabel(dUtil.qntdRegis("vendedores"));
 		lblVend.setForeground(SystemColor.desktop);
 		lblVend.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblVend.setBounds(90, 71, 15, 34);
 		panelPrinc.add(lblVend);
 
-		JLabel lblFrn = new JLabel(dUtil.qntdRegis("fornecedores"));
+		JLabel lblFrn =new JLabel("1");
+		//JLabel lblFrn = new JLabel(dUtil.qntdRegis("fornecedores"));
 		lblFrn.setForeground(SystemColor.desktop);
 		lblFrn.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblFrn.setBounds(720, 71, 15, 34);
 		panelPrinc.add(lblFrn);
 
-		JLabel lblProd =new JLabel(dUtil.qntdRegis("produtos"));
+		JLabel lblProd =new JLabel("1");
+		//JLabel lblProd =new JLabel(dUtil.qntdRegis("produtos"));
 		lblProd.setForeground(SystemColor.desktop);
 		lblProd.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblProd.setBounds(510, 71, 15, 34);

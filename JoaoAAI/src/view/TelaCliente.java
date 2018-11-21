@@ -281,7 +281,7 @@ public class TelaCliente extends JPanel {
 		
 		
 		DefaultTableModel modelo = (DefaultTableModel) jTCli.getModel();
-		lerJTable();
+		//lerJTable();
 		
 		JLabel lblClientes = new JLabel("Clientes : ");
 		lblClientes.setHorizontalTextPosition(SwingConstants.CENTER);
