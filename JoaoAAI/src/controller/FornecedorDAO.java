@@ -11,7 +11,6 @@ import javax.swing.JOptionPane;
 
 import connection.ConnectionManager;
 import model.Fornecedor;
-import model.Vendedor;
 
 public class FornecedorDAO {
 	
@@ -193,6 +192,38 @@ public class FornecedorDAO {
 		return listaFornecedor;
 
 	}
+	
+	public int buscaNomeRetornaCodigo(String nomeProd) {
+
+		Connection con = null;
+		int codigoFrn = 0;
+
+		try {
+			con = ConnectionManager.getMysqlConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			stmt = con.prepareStatement("SELECT cod_frn FROM fornecedores WHERE nom_frn like ?");
+			stmt.setString(1, "%"+nomeProd+"%");
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				codigoFrn = rs.getInt("cod_frn");
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return codigoFrn;
+
+	}
+	
 	
 	public List<Fornecedor> imprimirOrdemAlfabetica() {
 

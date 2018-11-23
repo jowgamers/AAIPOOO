@@ -187,6 +187,39 @@ public class ProdutoDAO {
 		return listaProduto;
 
 	}
+	//Busca nome e retorna codigo
+	public int buscaNomeRetornaCodigo(String nomeProd) {
+
+		Connection con = null;
+		int codigoProd = 0;
+
+		try {
+			con = ConnectionManager.getMysqlConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			stmt = con.prepareStatement("SELECT cod_prod FROM produtos WHERE nome_prod like ?");
+			stmt.setString(1, "%"+nomeProd+"%");
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				codigoProd= rs.getInt("cod_prod");
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return codigoProd;
+
+	}
+	
+	
 	public List<Produto> buscaCod(int codProd) {
 
 		Connection con = null;

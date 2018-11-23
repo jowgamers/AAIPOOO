@@ -5,20 +5,18 @@ import java.util.Date;
 
 public class Compra {
 	private int numCompra;
-	private Fornecedor fornecedor;
+	private int fornecedor;
 	private Date dataCompra;
-	private ArrayList<ItemCompra> compraItens = new ArrayList<ItemCompra>();
 	
 	public Compra () {
 		
 	}
 	
-	public Compra(int numCompra, Fornecedor fornecedor, Date dataCompra, ArrayList<ItemCompra> compraItens) {
+	public Compra(int numCompra, int fornecedor, Date dataCompra) {
 		super();
 		this.numCompra = numCompra;
 		this.fornecedor = fornecedor;
 		this.dataCompra = dataCompra;
-		this.compraItens = compraItens;
 	}
 
 
@@ -32,12 +30,12 @@ public class Compra {
 	}
 
 
-	public Fornecedor getFornecedor() {
+	public int getFornecedor() {
 		return fornecedor;
 	}
 
 
-	public void setFornecedor(Fornecedor fornecedor) {
+	public void setFornecedor(int fornecedor) {
 		this.fornecedor = fornecedor;
 	}
 
@@ -52,20 +50,10 @@ public class Compra {
 	}
 
 
-	public ArrayList<ItemCompra> getCompraItens() {
-		return compraItens;
-	}
-
-
-	public void setCompraItens(ArrayList<ItemCompra> compraItens) {
-		this.compraItens = compraItens;
-	}
-
-
 	@Override
 	public String toString() {
 		return "Compra [numCompra=" + numCompra + ", fornecedor=" + fornecedor + ", dataCompra=" + dataCompra
-				+ ", compraItens=" + compraItens + "]";
+				+ ", compraItens=" + "]";
 	}
 
 	

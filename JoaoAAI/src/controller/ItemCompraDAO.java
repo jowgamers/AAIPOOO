@@ -68,7 +68,7 @@ public class ItemCompraDAO {
 
 			while (rs.next()) {
 				ItemCompra iC = new ItemCompra();
-				iC.setCodCompra(rs.getInt("num_cmp"));
+				iC.setCodCompra(rs.getInt("id_itm_cmp"));
 				iC.setProduto(rs.getInt("cod_prod"));
 				iC.setQuantCompra(rs.getInt("cod_prod"));
 				iC.setValorCompra(rs.getDouble("cod_prod"));
@@ -97,7 +97,7 @@ public class ItemCompraDAO {
 		PreparedStatement stmt = null;
 
 		try {
-			stmt = con.prepareStatement("DELETE FROM ItemCompra WHERE num_cmp = ?");
+			stmt = con.prepareStatement("DELETE FROM ItemCompra WHERE id_itm_cmp = ?");
 			stmt.setInt(1, iC.getProduto());
 			stmt.executeUpdate();
 
@@ -108,6 +108,38 @@ public class ItemCompraDAO {
 			JOptionPane.showMessageDialog(null, "Erro ao excluir produto " + e, "Acões BD", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
+
+	}
+	
+	public double calculaVlr(int qntde, int codProd) {
+
+		Connection con = null;
+		double valor = 0;
+
+		try {
+			con = ConnectionManager.getMysqlConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			stmt = con.prepareStatement("SELECT vlr_unid FROM produtos WHERE id_itm_cmp = ?");
+			stmt.setInt(1, codProd);
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				double valorTmp = rs.getDouble("vlr_unid");
+				
+				valor = valorTmp * qntde;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return valor;
 
 	}
 }

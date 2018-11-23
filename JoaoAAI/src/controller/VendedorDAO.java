@@ -153,6 +153,37 @@ public class VendedorDAO {
 
 	}
 
+	public int buscaNomeRetornaCodigo(String nomeVnd) {
+
+		Connection con = null;
+		int codigoVnd = 0;
+
+		try {
+			con = ConnectionManager.getMysqlConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			stmt = con.prepareStatement("SELECT cod_vnd FROM vendedores WHERE nom_vnd like ?");
+			stmt.setString(1, "%"+nomeVnd+"%");
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				codigoVnd = rs.getInt("cod_vnd");
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return codigoVnd;
+
+	}
+	
 	public List<Vendedor> buscaPorCpf(String cpfVnd) {
 
 		Connection con = null;

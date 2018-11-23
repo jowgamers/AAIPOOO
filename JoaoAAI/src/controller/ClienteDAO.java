@@ -191,6 +191,38 @@ public class ClienteDAO {
 
 	}
 	
+	
+	public int buscaNomeRetornaCodigo(String nomeCli) {
+
+		Connection con = null;
+		int codigoCli = 0;
+
+		try {
+			con = ConnectionManager.getMysqlConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			stmt = con.prepareStatement("SELECT cod_cli FROM clientes WHERE nom_cli like ?");
+			stmt.setString(1, "%"+nomeCli+"%");
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				codigoCli = rs.getInt("cod_cli");
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return codigoCli;
+
+	}
+	
 	public List<Cliente> imprimirOrdemAlfabetica() {
 
 		Connection con = null;
