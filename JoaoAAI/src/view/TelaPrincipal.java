@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
@@ -93,10 +94,11 @@ public class TelaPrincipal extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		qntFrn = dUtil.qntdRegis("fornecedores");
-		qntCli = dUtil.qntdRegis("clientes");
-		qntProd = dUtil.qntdRegis("produtos");
-		qntVnd = dUtil.qntdRegis("vendedores");
+		/*
+		 * qntFrn = dUtil.qntdRegis("fornecedores"); qntCli =
+		 * dUtil.qntdRegis("clientes"); qntProd = dUtil.qntdRegis("produtos"); qntVnd =
+		 * dUtil.qntdRegis("vendedores");
+		 */
 
 		JPanel panel = new JPanel();
 		panel.setBorder(null);
@@ -155,7 +157,7 @@ public class TelaPrincipal extends JFrame {
 		panel.add(lblNome);
 		lblNome.setForeground(SystemColor.desktop);
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		
+
 		JButton btnImprimir = new JButton("");
 		btnImprimir.setRolloverIcon(new ImageIcon(TelaPrincipal.class.getResource("/imagens/consultahvr.png")));
 		btnImprimir.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/imagens/consulta.png")));
@@ -208,32 +210,32 @@ public class TelaPrincipal extends JFrame {
 
 		DAOUtil dUtil = new DAOUtil();
 
-		// JLabel lblCli =new JLabel("1");
-		lblCli = new JLabel(qntCli);
+		JLabel lblCli = new JLabel("1");
+		// lblCli = new JLabel(qntCli);
 		// JLabel lblCli = new JLabel(dUtil.qntdRegis("clientes"));
 		lblCli.setForeground(SystemColor.desktop);
 		lblCli.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblCli.setBounds(300, 71, 15, 34);
 		panelPrinc.add(lblCli);
 
-		// JLabel lblVend =new JLabel("1");
-		lblVend = new JLabel(qntVnd);
+		JLabel lblVend = new JLabel("1");
+		// lblVend = new JLabel(qntVnd);
 		// JLabel lblVend = new JLabel(dUtil.qntdRegis("vendedores"));
 		lblVend.setForeground(SystemColor.desktop);
 		lblVend.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblVend.setBounds(90, 71, 15, 34);
 		panelPrinc.add(lblVend);
 
-		// JLabel lblFrn =new JLabel("1");
-		lblFrn = new JLabel(qntFrn);
+		JLabel lblFrn = new JLabel("1");
+		// lblFrn = new JLabel(qntFrn);
 		// JLabel lblFrn = new JLabel(dUtil.qntdRegis("fornecedores"));
 		lblFrn.setForeground(SystemColor.desktop);
 		lblFrn.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblFrn.setBounds(720, 71, 15, 34);
 		panelPrinc.add(lblFrn);
 
-		// JLabel lblProd =new JLabel("1");
-		lblProd = new JLabel(qntProd);
+		JLabel lblProd = new JLabel("1");
+		// lblProd = new JLabel(qntProd);
 		// JLabel lblProd =new JLabel(dUtil.qntdRegis("produtos"));
 		lblProd.setForeground(SystemColor.desktop);
 		lblProd.setFont(new Font("Tahoma", Font.PLAIN, 28));
@@ -252,7 +254,13 @@ public class TelaPrincipal extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 
-				System.exit(0);
+				int reply = JOptionPane.showConfirmDialog(null, "Voce deseja realmente sair ? ", "Saida", JOptionPane.YES_NO_OPTION);
+				if (reply == JOptionPane.YES_OPTION) {
+					JOptionPane.showMessageDialog(null, "Até Logo");
+					System.exit(0);
+				} else {
+					JOptionPane.showMessageDialog(null, "Bem vindo novamente");
+				}
 			}
 		});
 		lbl_fechar.setHorizontalAlignment(SwingConstants.CENTER);
@@ -286,18 +294,15 @@ public class TelaPrincipal extends JFrame {
 
 		btnInicial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				qntFrn = dUtil.qntdRegis("fornecedores");
-				lblFrn.setText(qntFrn);
-				
-				qntCli = dUtil.qntdRegis("clientes");
-				lblCli.setText(qntCli);
-				
-				qntProd = dUtil.qntdRegis("produtos");
-				lblProd.setText(qntProd);
-				
-				qntVnd = dUtil.qntdRegis("vendedores");
-				lblVend.setText(qntVnd);
-
+				/*
+				 * qntFrn = dUtil.qntdRegis("fornecedores"); lblFrn.setText(qntFrn);
+				 * 
+				 * qntCli = dUtil.qntdRegis("clientes"); lblCli.setText(qntCli);
+				 * 
+				 * qntProd = dUtil.qntdRegis("produtos"); lblProd.setText(qntProd);
+				 * 
+				 * qntVnd = dUtil.qntdRegis("vendedores"); lblVend.setText(qntVnd);
+				 */
 				trocarPanel(panelPrinc);
 			}
 		});
@@ -308,7 +313,7 @@ public class TelaPrincipal extends JFrame {
 				trocarPanel(telaVende);
 			}
 		});
-		
+
 		btnImprimir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				TelaConsultas telaconsultas = new TelaConsultas();

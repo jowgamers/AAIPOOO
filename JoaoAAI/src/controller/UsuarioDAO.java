@@ -12,7 +12,12 @@ import model.Produto;
 import model.Usuario;
 
 public class UsuarioDAO {
-
+	/**
+	 * 
+	 * @param matricula
+	 * @param senha
+	 * @return login valido
+	 */
 	public boolean confereLogin(String matricula, String senha) {
 
 		Connection con = null;
@@ -46,7 +51,11 @@ public class UsuarioDAO {
 		return valido;
 
 	}
-	
+	/**
+	 * @desc busca o nome da pessoa por matricula, para impressão na tela apos login
+	 * @param nomeFunc
+	 * @return
+	 */
 	public List<Usuario> buscaNomePorMatricula(String nomeFunc) {
 
 		Connection con = null;

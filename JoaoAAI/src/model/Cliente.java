@@ -1,9 +1,11 @@
 package model;
 /**
  * 
- * 
+ * @descricao Classe Cliente, filha de Pessoa
  * @author Joao Vitor
- *
+ * @package model
+ * @version 1.0
+ * 
  */
 public class Cliente extends Pessoa {
 	

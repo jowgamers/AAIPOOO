@@ -1,5 +1,14 @@
 package model;
 
+/**
+ * 
+ * @descricao Classe Fornecedor, classe herda atributos de pessoa
+ * @author Joao Vitor
+ * @package model
+ * @version 1.0
+ * 
+ */
+
 public class Fornecedor extends Pessoa{
 	
 	private String cnpj;

@@ -1,5 +1,14 @@
 package model;
 
+/**
+ * 
+ * @descricao Classe Vendedor, classe herda atributos de pessoa
+ * @author Joao Vitor
+ * @package model
+ * @version 1.0
+ * 
+ */
+
 public class Vendedor extends Pessoa{
 	
 	//

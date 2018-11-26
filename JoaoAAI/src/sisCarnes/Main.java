@@ -1,5 +1,12 @@
 package sisCarnes;
-
+/**
+ * 
+ * @descricao Classe Main, inicializadora do sistema, executa primeiro a splash screen, tela login, tela principal respectivamente
+ * @author Joao Vitor
+ * @package sisCarnes
+ * @version 1.0
+ * 
+ */
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;

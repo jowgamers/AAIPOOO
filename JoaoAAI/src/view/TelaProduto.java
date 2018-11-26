@@ -209,10 +209,10 @@ public class TelaProduto extends JPanel {
 		consultarPanel.add(btnImprimePorOrdem_1);
 
 		DefaultTableModel modelo = (DefaultTableModel) jTProd.getModel();
-		lerJTable();
+		//lerJTable();
 
 		JPanel cadastrarPanel = new JPanel();
-		cadastrarPanel.setBackground(new Color(32, 178, 170));
+		cadastrarPanel.setBackground(Color.LIGHT_GRAY);
 		cadastrarPanel.setForeground(Color.WHITE);
 		tabbedPane.addTab("Cadastrar", null, cadastrarPanel, null);
 		cadastrarPanel.setLayout(null);

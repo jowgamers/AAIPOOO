@@ -1,3 +1,11 @@
+/**
+ * 
+ * @descricao Classe Compra, classe modelo das compras finalizadas e aprovadas
+ * @author Joao Vitor
+ * @package model
+ * @version 1.0
+ * 
+ */
 package model;
 
 import java.util.ArrayList;

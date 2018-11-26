@@ -35,6 +35,7 @@ import model.Usuario;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Rectangle;
 
 public class TelaLogin extends JFrame {
 
@@ -93,19 +94,29 @@ public class TelaLogin extends JFrame {
 		JMenu mnOpes = new JMenu("Op\u00E7\u00F5es");
 		menuBar.add(mnOpes);
 		
-		JMenuItem mntmComoCadastrar = new JMenuItem("Como cadastrar");
-		mntmComoCadastrar.addMouseListener(new MouseAdapter() {
+		JButton btnNewButton = new JButton("Como cadastrar");
+		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				JOptionPane.showMessageDialog(null, "\n\n Para efetuar o cadastro, peça ao "
-						+ "\ngerente responsável abra uma demanda\n\n", "Como cadastrar", JOptionPane.QUESTION_MESSAGE); //Manipular melhor a tela
+			public void mouseEntered(MouseEvent arg0) {
+				
+				btnNewButton.setForeground(Color.BLUE);
 			}
-			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				
+				btnNewButton.setForeground(Color.BLACK);
+			}
 		});
-		mnOpes.add(mntmComoCadastrar);
-		
-		JMenuItem mntmSobre = new JMenuItem("Sobre");
-		mnOpes.add(mntmSobre);
+		btnNewButton.setContentAreaFilled(false);
+		btnNewButton.setBorderPainted(false);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				JOptionPane.showMessageDialog(null, "Para efetuar o cadastro peça para o coordenador responsável pela área", "Cadastro", JOptionPane.PLAIN_MESSAGE);
+
+			}
+		});
+		mnOpes.add(btnNewButton);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 339, 480);

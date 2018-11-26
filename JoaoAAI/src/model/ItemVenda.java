@@ -1,5 +1,14 @@
 package model;
 
+/**
+ * 
+ * @descricao Classe ItemVenda, classe como carrinho do sistema
+ * @author Joao Vitor
+ * @package model
+ * @version 1.0
+ * 
+ */
+
 public class ItemVenda {
 
 	private int codVenda;

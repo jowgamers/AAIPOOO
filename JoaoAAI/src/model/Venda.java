@@ -1,5 +1,14 @@
 package model;
 
+/**
+ * 
+ * @descricao Classe Venda, classe modelo das vendas aprovadas do sistema
+ * @author Joao Vitor
+ * @package model
+ * @version 1.0
+ * 
+ */
+
 import java.util.ArrayList;
 import java.util.Date;
 

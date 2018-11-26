@@ -14,6 +14,12 @@ import model.Fornecedor;
 
 public class FornecedorDAO {
 	
+	/**
+	 * @desc Classe  C R U D --- > Salvar atrivutos no banco de dados (CREATE)
+	 * @throws SqlExeceptions
+	 * @param Clientes
+	 */
+	
 	public void create(Fornecedor f) {
 
 		Connection con = null;
@@ -50,6 +56,13 @@ public class FornecedorDAO {
 		}
 
 	}
+	
+	
+	/**
+	 * @desc Classe  C R U D --- > Ler atributos no banco de dados (READ)
+	 * @throws SqlExeceptions
+	 * @return lista de Fornecedores
+	 */
 
 	public List<Fornecedor> read() {
 
@@ -89,6 +102,15 @@ public class FornecedorDAO {
 		return listaFornecedor;
 
 	}
+	
+	
+	/**
+	 * @desc Classe  C R U D --- > Atualizar atributos no banco de dados (UPDATE)
+	 * @throws SqlExeceptions
+	 * @param Fornecedor
+	 * 
+	 */
+	
 
 	public void update(Fornecedor f) {
 
@@ -125,6 +147,13 @@ public class FornecedorDAO {
 		}
 
 	}
+	
+	
+	/**
+	 * @desc Classe  C R U D --- > Deletar atributos no banco de dados (Delete)
+	 * @throws SqlExeceptions
+	 * @return lista de Fornecedores
+	 */
 
 	public void delete(Fornecedor f) {
 
@@ -152,6 +181,15 @@ public class FornecedorDAO {
 		}
 
 	}
+	
+	
+	/**
+	 * @desc Ler atributos no BD por CNPJ do Fornecedor
+	 * @throws SqlExeceptions
+	 * @param cnpj
+	 * @return lista de Fornecedores
+	 */
+	
 
 	public List<Fornecedor> buscaPorCnpjFrn(String cnpjFrn) {
 
@@ -192,6 +230,11 @@ public class FornecedorDAO {
 		return listaFornecedor;
 
 	}
+	/**
+	 * @desc Busca codigo apartir do nome da pessoa
+	 * @param nomeProd
+	 * @return codigoFornecedor
+	 */
 	
 	public int buscaNomeRetornaCodigo(String nomeProd) {
 

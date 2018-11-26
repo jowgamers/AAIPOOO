@@ -15,7 +15,11 @@ import model.Fornecedor;
 import model.Produto;
 
 public class CompraDAO {
-	
+	/**
+	 * @desc Classe  C R U D --- > Salvar atrivutos no banco de dados (CREATE)
+	 * @throws SqlExeceptions
+	 * @param Clientes
+	 */
 
 	public void create(Compra c) {
 

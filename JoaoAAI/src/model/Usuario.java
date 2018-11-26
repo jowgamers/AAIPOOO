@@ -1,5 +1,15 @@
 package model;
 
+/**
+ * 
+ * @descricao Classe Usuario, classe modelo da tabela de logins do sistema
+ * @author Joao Vitor
+ * @package model
+ * @version 1.0
+ * 
+ */
+
+
 public class Usuario {
 	
 	private String matricula;

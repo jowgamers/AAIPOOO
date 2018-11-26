@@ -139,7 +139,7 @@ public class TelaFornecedor extends JPanel {
 		lblNome.setBounds(10, 11, 46, 14);
 		pnlConsultar.add(lblNome);
 
-		JLabel lblCpf = new JLabel("CPF : ");
+		JLabel lblCpf = new JLabel("CNPJ : ");
 		lblCpf.setBounds(170, 11, 46, 14);
 		pnlConsultar.add(lblCpf);
 
@@ -166,8 +166,8 @@ public class TelaFornecedor extends JPanel {
 		txtCEmail.setBounds(433, 25, 128, 29);
 		pnlConsultar.add(txtCEmail);
 
-		JLabel lblMetaMs = new JLabel("Meta M\u00EAs : ");
-		lblMetaMs.setBounds(572, 11, 75, 14);
+		JLabel lblMetaMs = new JLabel("Nome Contato : ");
+		lblMetaMs.setBounds(572, 11, 110, 14);
 		pnlConsultar.add(lblMetaMs);
 
 		txtNomCnt = new JTextField();
@@ -233,7 +233,7 @@ public class TelaFornecedor extends JPanel {
 		txtNomeFor.setColumns(10);
 
 		JLabel lblNomeFornecedor = new JLabel("Nome Fornecedor : ");
-		lblNomeFornecedor.setBounds(41, 31, 107, 14);
+		lblNomeFornecedor.setBounds(41, 31, 174, 14);
 		lblCadastrar.add(lblNomeFornecedor);
 
 		JLabel lblTelefoneFornecedor = new JLabel("Telefone Fornecedor: ");
@@ -246,7 +246,7 @@ public class TelaFornecedor extends JPanel {
 		lblCadastrar.add(txtTelFrn);
 
 		JLabel lblEmailFornecedor = new JLabel("Email Fornecedor :");
-		lblEmailFornecedor.setBounds(41, 226, 97, 14);
+		lblEmailFornecedor.setBounds(41, 226, 174, 14);
 		lblCadastrar.add(lblEmailFornecedor);
 
 		txtEmlVnd = new JTextField();
@@ -254,8 +254,8 @@ public class TelaFornecedor extends JPanel {
 		txtEmlVnd.setBounds(41, 251, 174, 29);
 		lblCadastrar.add(txtEmlVnd);
 
-		JLabel lblMetaMensal_1 = new JLabel("Meta Mensal : ");
-		lblMetaMensal_1.setBounds(41, 291, 97, 14);
+		JLabel lblMetaMensal_1 = new JLabel("Contato do Fornecedor : ");
+		lblMetaMensal_1.setBounds(41, 291, 174, 14);
 		lblCadastrar.add(lblMetaMensal_1);
 
 		txtMetaMensal = new JTextField();
@@ -289,14 +289,14 @@ public class TelaFornecedor extends JPanel {
 		lblCadastrar.add(btnNewButton);
 
 		DefaultTableModel modelo = (DefaultTableModel) jTFor.getModel();
-		lerJTable();
+		//lerJTable();
 		
 		txtCpfFrn = new JTextField();
 		txtCpfFrn.setColumns(10);
 		txtCpfFrn.setBounds(41, 121, 174, 29);
 		lblCadastrar.add(txtCpfFrn);
 
-		JLabel lblCpfFornecedor = new JLabel("Cpf Fornecedor : ");
+		JLabel lblCpfFornecedor = new JLabel("Cnpj Fornecedor : ");
 		lblCpfFornecedor.setBounds(41, 96, 145, 14);
 		lblCadastrar.add(lblCpfFornecedor);
 
@@ -349,7 +349,7 @@ public class TelaFornecedor extends JPanel {
 
 			}
 		});
-		btnAdicionar.setBounds(274, 57, 166, 31);
+		btnAdicionar.setBounds(274, 57, 184, 31);
 		lblCompra.add(btnAdicionar);
 
 		JSeparator separator = new JSeparator();
@@ -438,12 +438,12 @@ public class TelaFornecedor extends JPanel {
 
 			}
 		});
-		btnFinalizar.setBounds(487, 317, 89, 31);
+		btnFinalizar.setBounds(230, 317, 89, 31);
 		lblCompra.add(btnFinalizar);
 
 
 		DefaultTableModel modeloItemCompra = (DefaultTableModel) jTCarri.getModel();
-		lerJTableItemCompra();
+		//lerJTableItemCompra();
 		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(0, 295, 820, 2);
@@ -498,9 +498,13 @@ public class TelaFornecedor extends JPanel {
 		});
 		btnExcluirCompra.setBounds(153, 387, 133, 31);
 		lblCompra.add(btnExcluirCompra);
+		/*
+		
 		populaBoxFrn();//Metodo não testado
 		populaBoxProd();//Metodo não testado
 		populaBoxCmp();
+		*/
+		
 
 		JLabel lblClientes = new JLabel("Fornecedor");
 		lblClientes.setHorizontalTextPosition(SwingConstants.CENTER);

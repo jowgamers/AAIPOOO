@@ -14,21 +14,22 @@ public class Splash extends JFrame {
  
     public Splash() {
         super("Splash");
+        getContentPane().setBackground(new Color(48, 50, 61));
         setSize(404, 310);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setUndecorated(true);
         img = new ImageIcon(getClass().getResource("/imagens/cow.png"));
         imglabel = new JLabel(img);
-        add(imglabel);
-        setLayout(null);
+        getContentPane().add(imglabel);
+        getContentPane().setLayout(null);
         pbar = new JProgressBar();
         pbar.setMinimum(0);
         pbar.setMaximum(100);
         pbar.setStringPainted(true);
         pbar.setForeground(Color.LIGHT_GRAY);
         imglabel.setBounds(0, 0, 404, 310);
-        add(pbar);
+        getContentPane().add(pbar);
         pbar.setPreferredSize(new Dimension(310, 30));
         pbar.setBounds(0, 290, 404, 20);
  

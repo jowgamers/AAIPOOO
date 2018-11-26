@@ -1,14 +1,4 @@
 package view;
-/*
-cod_vnd INT
-dta_cad_vnd STRING
-
-nom_vnd STRING
-cpf_vnd ST
-tel_vnd ST
-eml_vnd ST
-mta_mes_vnd DB
-*/
 
 import java.awt.Color;
 import java.awt.Font;
@@ -217,6 +207,16 @@ public class TelaVendedor extends JPanel {
 		btnBuscarPorCpf.setBounds(170, 65, 150, 31);
 		pnlConsultar.add(btnBuscarPorCpf);
 		
+		JButton button = new JButton("Imprime Ordem Alfabetica");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				lerJTableOrdemAlfabetica();
+			}
+		});
+		button.setBounds(330, 65, 181, 31);
+		pnlConsultar.add(button);
+		
 		
 		JPanel lblCadastrar = new JPanel();
 		tabbedPane.addTab("Cadastrar", null, lblCadastrar, null);
@@ -250,7 +250,7 @@ public class TelaVendedor extends JPanel {
 		lblCadastrar.add(txtEmlVnd);
 		
 		DefaultTableModel modelo = (DefaultTableModel) jTVend.getModel();
-		lerJTable();
+		//lerJTable();
 		
 		JLabel lblMetaMensal_1 = new JLabel("Meta Mensal : ");
 		lblMetaMensal_1.setBounds(41, 291, 97, 14);
@@ -322,6 +322,21 @@ public class TelaVendedor extends JPanel {
 		}
 
 	}
+	
+	public void lerJTableOrdemAlfabetica() {
+		DefaultTableModel modelo = (DefaultTableModel) jTVend.getModel();
+		modelo.setNumRows(0);
+		VendedorDAO vDAO = new VendedorDAO();
+
+		for (Vendedor v : vDAO.imprimirOrdemAlfabetica()) {
+			modelo.addRow(new Object[] { v.getCodigo(), v.getNome(), v.getTelefones(), v.getCpf(), v.getEmail(), v.getDataCad(), v.getMetaMensal()
+
+			});
+		}
+
+	}
+	
+	
 	/**
 	 * Metodo popular tabela por CPF
 	 * @param cpfVnd

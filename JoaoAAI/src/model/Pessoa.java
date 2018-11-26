@@ -4,10 +4,11 @@ import java.util.Date;
 
 /**
  * 
+ * @descricao Classe Pessoa, classe abstrata, pai de Vendedor, Forcenedor, clientes
  * @author Joao Vitor
+ * @package model
  * @version 1.0
- * @classe Pesssoa -- Abstrata
- *
+ * 
  */
 
 public class Pessoa {

@@ -14,6 +14,12 @@ import model.Produto;
 
 public class ProdutoDAO {
 
+	/**
+	 * @desc Classe  C R U D --- > Salvar atrivutos no banco de dados (CREATE)
+	 * @throws SqlExeceptions
+	 * @param Produto
+	 */
+	
 	public void create(Produto p) {
 
 		Connection con = null;

@@ -13,6 +13,13 @@ import connection.ConnectionManager;
 import model.Venda;
 
 public class VendaDAO {
+	
+	/**
+	 * @desc Classe  C R U D --- > Salvar atrivutos no banco de dados (CREATE)
+	 * @throws SqlExeceptions
+	 * @param Venda
+	 */
+	
 	public void create(Venda v) {
 
 		Connection con = null;

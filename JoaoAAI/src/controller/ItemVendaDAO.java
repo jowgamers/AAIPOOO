@@ -14,6 +14,13 @@ import model.ItemCompra;
 import model.ItemVenda;
 
 public class ItemVendaDAO {
+	
+	/**
+	 * @desc Classe  C R U D --- > Salvar atrivutos no banco de dados (CREATE)
+	 * @throws SqlExeceptions
+	 * @param Carrinho
+	 */
+	
 	public void create(ItemVenda i) {
 
 		Connection con = null;

@@ -1,5 +1,14 @@
 package model;
 
+/**
+ * 
+ * @descricao Classe ItemCompra, classe gerada como carrinho do sistema
+ * @author Joao Vitor
+ * @package model
+ * @version 1.0
+ * 
+ */
+
 public class ItemCompra {
 	
 	private int codCompra;

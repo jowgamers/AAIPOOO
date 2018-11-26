@@ -1,5 +1,14 @@
 package model;
 
+/**
+ * 
+ * @descricao Classe Estatiticas, classe modelo para gerar a arraylist de estastiticas
+ * @author Joao Vitor
+ * @package model
+ * @version 1.0
+ * 
+ */
+
 public class Estastiticas {
 	
 	private String nome;

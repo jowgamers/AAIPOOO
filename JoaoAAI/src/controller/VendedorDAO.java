@@ -13,6 +13,13 @@ import connection.ConnectionManager;
 import model.Vendedor;
 
 public class VendedorDAO {
+	
+	/**
+	 * @desc Classe  C R U D --- > Salvar atrivutos no banco de dados (CREATE)
+	 * @throws SqlExeceptions
+	 * @param Vendedor
+	 */
+
 
 	public void create(Vendedor v) {
 

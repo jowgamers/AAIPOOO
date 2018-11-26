@@ -49,7 +49,7 @@ public class DAOUtil {
 
 	}
 
-	public List<Estastiticas> read() {
+	public List<Estastiticas> readClienteData(String data1, String data2) {
 
 		Connection con = null;
 
@@ -65,23 +65,28 @@ public class DAOUtil {
 		List<Estastiticas> listaEstastiticas = new ArrayList<Estastiticas>();
 
 		try {
-			stmt = con.prepareStatement("SELECT * FROM produtos");
+			
+			/*
+			 *
+			    SELECT c.nom_cli as nome, count(v.num_vnd) as qntde, sum(iv.vlr_vnd) as total
+				FROM venda as v, clientes as c, itemvenda as iv
+				where v.cod_cli = c.cod_cli and v.id_itm_vnd = iv.num_vnd
+				and v.dta_vnd between ? and ?
+				group by v.cod_cli ; 
+			 */
+			//stmt = con.prepareStatement("SELECT * FROM produtos");
+			stmt = con.prepareStatement("SELECT c.nom_cli as nome, count(v.num_vnd) as qntde, sum(iv.vlr_vnd) as total FROM venda as v, clientes as c, itemvenda as iv where v.cod_cli = c.cod_cli and v.id_itm_vnd = iv.num_vnd and v.dta_vnd between ? and ? group by v.cod_cli ; ");
+			stmt.setString(1, data1 + "%");
+			stmt.setString(2, data2 + "%");
 			rs = stmt.executeQuery();
 
 			while (rs.next()) {
 				Estastiticas es = new Estastiticas();
-				/*
-				es.setNome(nome);
-				es.setQntde(qntde);
-				es.setValor(valor);	
+
+				es.setNome(rs.getString("nome"));
+				es.setQntde(rs.getInt("qntde"));
+				es.setValor(rs.getDouble("total"));	
 				
-				p.setCodigo(rs.getInt("cod_prod"));
-				p.setNome(rs.getString("nome_prod"));
-				p.setPrecoUnitario(rs.getDouble("vlr_unid"));
-				p.setEstoque(rs.getInt("qnt_estoq"));
-				p.setEstoqueminimo(rs.getInt("qnt_estoq_min"));
-				p.setDataCad(rs.getDate("data_cad"));
-*/
 				listaEstastiticas.add(es);
 			}
 
@@ -92,5 +97,43 @@ public class DAOUtil {
 
 	}
 
+	public List<Estastiticas> readVendedorData(String data1, String data2) {
+
+		Connection con = null;
+
+		try {
+			con = ConnectionManager.getMysqlConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		List<Estastiticas> listaEstastiticas = new ArrayList<Estastiticas>();
+
+		try {
+			stmt = con.prepareStatement("SELECT vende.nom_vnd as nome, count(v.num_vnd) as qntde, sum(iv.vlr_vnd) as total FROM venda as v, vendedores as vende, itemvenda as iv where vende.cod_vnd = v.cod_vnd and v.id_itm_vnd = iv.num_vnd and v.dta_vnd between ? and ? group by vende.cod_cli ; ");
+			stmt.setString(1, data1 + "%");
+			stmt.setString(2, data2 + "%");
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				Estastiticas es = new Estastiticas();
+
+				es.setNome(rs.getString("nome"));
+				es.setQntde(rs.getInt("qntde"));
+				es.setValor(rs.getDouble("total"));	
+				
+				listaEstastiticas.add(es);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listaEstastiticas;
+
+	}
+	
 
 }

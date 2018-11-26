@@ -1,5 +1,14 @@
 package model;
 
+/**
+ * 
+ * @descricao Classe sisComException, gerar exceções
+ * @author Joao Vitor
+ * @package model
+ * @version 1.0
+ * 
+ */
+
 public class SisComException extends Exception{
 
 	

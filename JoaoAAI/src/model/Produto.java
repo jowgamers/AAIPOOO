@@ -1,8 +1,16 @@
 package model;
 
 import java.util.Date;
+/**
+ * 
+ * @descricao Classe Produto, classe modelo para tabela de produtos
+ * @author Joao Vitor
+ * @package model
+ * @version 1.0
+ * 
+ */
 
-//Warning no Comparable -- Precisa do objeto?
+
 public class Produto implements Comparable<Produto> {
 
 	private int codigo;

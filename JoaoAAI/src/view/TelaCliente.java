@@ -83,7 +83,7 @@ public class TelaCliente extends JPanel {
 		add(tabbedPane);
 		
 		JPanel pnlConsultar = new JPanel();
-		tabbedPane.addTab("Deletar", null, pnlConsultar, null);
+		tabbedPane.addTab("Consultar", null, pnlConsultar, null);
 		pnlConsultar.setLayout(null);
 		
 
@@ -253,7 +253,7 @@ public class TelaCliente extends JPanel {
 		
 		
 		JPanel lblCadastrar = new JPanel();
-		tabbedPane.addTab("Consultar", null, lblCadastrar, null);
+		tabbedPane.addTab("Cadastrar", null, lblCadastrar, null);
 		lblCadastrar.setLayout(null);
 		
 		txtNomeVend = new JTextField();
@@ -283,7 +283,7 @@ public class TelaCliente extends JPanel {
 		txtEmlVnd.setBounds(41, 251, 174, 29);
 		lblCadastrar.add(txtEmlVnd);
 		
-		JLabel lblMetaMensal_1 = new JLabel("Meta Mensal : ");
+		JLabel lblMetaMensal_1 = new JLabel("Limite Credito : ");
 		lblMetaMensal_1.setBounds(41, 291, 97, 14);
 		lblCadastrar.add(lblMetaMensal_1);
 		
@@ -328,7 +328,7 @@ public class TelaCliente extends JPanel {
 		
 		
 		DefaultTableModel modelo = (DefaultTableModel) jTCli.getModel();
-		lerJTable();
+		//lerJTable();
 		
 		
 		
@@ -339,7 +339,7 @@ public class TelaCliente extends JPanel {
 		
 		
 		JPanel lblVenda = new JPanel();
-		tabbedPane.addTab("Compra", null, lblVenda, null);
+		tabbedPane.addTab("Vender", null, lblVenda, null);
 		lblVenda.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("Item Venda");
@@ -347,7 +347,7 @@ public class TelaCliente extends JPanel {
 		lblVenda.add(lblNewLabel);
 
 		JLabel lblProduto = new JLabel("Produto");
-		lblProduto.setBounds(10, 43, 46, 14);
+		lblProduto.setBounds(10, 43, 133, 14);
 		lblVenda.add(lblProduto);
 
 		JLabel lblQuantidade = new JLabel("Quantidade");
@@ -509,14 +509,14 @@ public class TelaCliente extends JPanel {
 
 
 		DefaultTableModel modeloItemCompra = (DefaultTableModel) jTCarri.getModel();
-		lerJTableItemVenda();
+		//lerJTableItemVenda();
 		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(0, 295, 820, 2);
 		lblVenda.add(separator_1);
 
 		JLabel lblNumCompra = new JLabel("Num Carrinho : ");
-		lblNumCompra.setBounds(296, 302, 80, 14);
+		lblNumCompra.setBounds(296, 302, 90, 14);
 		lblVenda.add(lblNumCompra);
 
 		txtNumCompra = new JTextField();
@@ -533,7 +533,7 @@ public class TelaCliente extends JPanel {
 		comboBoxCmp.setBounds(10, 387, 133, 31);
 		lblVenda.add(comboBoxCmp);
 
-		JLabel lblNumCompra_1 = new JLabel("Num Compra : ");
+		JLabel lblNumCompra_1 = new JLabel("Num  Venda");
 		lblNumCompra_1.setBounds(10, 373, 101, 14);
 		lblVenda.add(lblNumCompra_1);
 
@@ -557,7 +557,7 @@ public class TelaCliente extends JPanel {
 		lblVenda.add(btnExcluirCompra);
 		
 		JLabel Cliente = new JLabel("Cliente");
-		Cliente.setBounds(10, 303, 46, 14);
+		Cliente.setBounds(10, 303, 133, 14);
 		lblVenda.add(Cliente);
 		
 		comboCli = new JComboBox();
@@ -565,7 +565,7 @@ public class TelaCliente extends JPanel {
 		lblVenda.add(comboCli);
 		
 		JLabel lblVendedore = new JLabel("Vendedor");
-		lblVendedore.setBounds(153, 302, 46, 14);
+		lblVendedore.setBounds(153, 302, 133, 14);
 		lblVenda.add(lblVendedore);
 		
 		comboVnd = new JComboBox();
@@ -573,22 +573,22 @@ public class TelaCliente extends JPanel {
 		lblVenda.add(comboVnd);
 		
 		JLabel lblFormaPgto = new JLabel("Forma Pgto : ");
-		lblFormaPgto.setBounds(386, 302, 80, 14);
+		lblFormaPgto.setBounds(396, 302, 122, 14);
 		lblVenda.add(lblFormaPgto);
 		
 		rdbtnAVista = new JRadioButton("A vista");
 		buttonGroup.add(rdbtnAVista);
-		rdbtnAVista.setBounds(386, 320, 80, 23);
+		rdbtnAVista.setBounds(396, 320, 67, 23);
 		lblVenda.add(rdbtnAVista);
 		
 		rdbtnAPrazo = new JRadioButton("A prazo");
 		buttonGroup.add(rdbtnAPrazo);
-		rdbtnAPrazo.setBounds(468, 320, 80, 23);
+		rdbtnAPrazo.setBounds(468, 320, 63, 23);
 		lblVenda.add(rdbtnAPrazo);
-		populaBoxCli();
+		/*populaBoxCli();
 		populaBoxProd();
 		populaBoxCmp();
-		populaBoxVnd();
+		populaBoxVnd();*/
 		
 		JLabel lblClientes = new JLabel("Clientes : ");
 		lblClientes.setHorizontalTextPosition(SwingConstants.CENTER);

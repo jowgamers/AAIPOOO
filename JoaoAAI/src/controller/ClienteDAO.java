@@ -14,6 +14,12 @@ import model.Cliente;
 
 public class ClienteDAO {
 
+	/**
+	 * @desc Classe  C R U D --- > Salvar atrivutos no banco de dados (CREATE)
+	 * @throws SqlExeceptions
+	 * @param Clientes
+	 */
+	
 	public void create(Cliente c) {
 
 		Connection con = null;
