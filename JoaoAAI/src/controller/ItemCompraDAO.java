@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import connection.ConnectionManager;
+import model.Fornecedor;
 import model.ItemCompra;
 import model.Produto;
 
@@ -29,7 +30,7 @@ public class ItemCompraDAO {
 		// Falta fechar a conexão com o banco
 		try {
 			stmt = con.prepareStatement(
-					"INSERT INTO itemcompra (cod_prod, qnt_cmp, vlr_cmp, cmp_fnl) VALUES (?, ?, ?, N");
+					"INSERT INTO itemcompra (cod_prod, qnt_cmp, vlr_cmp, cmp_fnl) VALUES (?, ?, ?, 'N')");
 			
 			stmt.setInt(1, i.getProduto());
 			stmt.setDouble(2, i.getQuantCompra());
@@ -70,8 +71,8 @@ public class ItemCompraDAO {
 				ItemCompra iC = new ItemCompra();
 				iC.setCodCompra(rs.getInt("id_itm_cmp"));
 				iC.setProduto(rs.getInt("cod_prod"));
-				iC.setQuantCompra(rs.getInt("cod_prod"));
-				iC.setValorCompra(rs.getDouble("cod_prod"));
+				iC.setQuantCompra(rs.getInt("qnt_cmp"));
+				iC.setValorCompra(rs.getDouble("vlr_cmp"));
 				iC.setCompraFinalizada(rs.getString("cmp_fnl"));
 
 				ItemCompra.add(iC);
@@ -97,8 +98,8 @@ public class ItemCompraDAO {
 		PreparedStatement stmt = null;
 
 		try {
-			stmt = con.prepareStatement("DELETE FROM ItemCompra WHERE id_itm_cmp = ?");
-			stmt.setInt(1, iC.getProduto());
+			stmt = con.prepareStatement("DELETE FROM itemcompra WHERE id_itm_cmp = ?");
+			stmt.setInt(1, iC.getCodCompra());
 			stmt.executeUpdate();
 
 			JOptionPane.showMessageDialog(null, "Produto excluido com sucesso", "Acões BD", JOptionPane.PLAIN_MESSAGE);
@@ -126,7 +127,7 @@ public class ItemCompraDAO {
 		ResultSet rs = null;
 
 		try {
-			stmt = con.prepareStatement("SELECT vlr_unid FROM produtos WHERE id_itm_cmp = ?");
+			stmt = con.prepareStatement("SELECT vlr_unid FROM produtos WHERE cod_prod = ?");
 			stmt.setInt(1, codProd);
 			rs = stmt.executeQuery();
 
@@ -142,4 +143,7 @@ public class ItemCompraDAO {
 		return valor;
 
 	}
+	
+
+	
 }

@@ -1,12 +1,26 @@
 package sisCarnes;
 
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 
 import view.Splash;
 import view.TelaLogin;
 
 public class Main {
 	public static void main(String args[]) throws Exception {
+		
+		try {
+			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
+		} catch (Exception e) {
+			// Excessão para se não achar a nimbus posso colocar outra laF
+		}
+		
 		Splash s = new Splash();
 		s.setVisible(true);
 		Thread t = Thread.currentThread();

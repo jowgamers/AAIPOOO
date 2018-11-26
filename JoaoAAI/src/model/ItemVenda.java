@@ -1,29 +1,42 @@
 package model;
 
 public class ItemVenda {
-	
-	private Produto produto;
+
+	private int codVenda;
+	private int produto;
 	private int quantVenda;
 	private double valorVenda;
+	private String compraFinalizada;
 	
 	//
-	
+
 	public ItemVenda () {
 		
 	}
 	
-	public ItemVenda(Produto produto, int quantVenda, double valorVenda) {
+	public ItemVenda(int codVenda,int produto, int quantVenda, double valorVenda, String compraFinalizada) {
 		super();
+		this.codVenda = codVenda;
 		this.produto = produto;
 		this.quantVenda = quantVenda;
 		this.valorVenda = valorVenda;
+		this.compraFinalizada = compraFinalizada;
 	}
-	
+
 	//
-	public Produto getProduto() {
+	
+	public int getCodVenda() {
+		return codVenda;
+	}
+
+	public void setCodVenda(int codVenda) {
+		this.codVenda = codVenda;
+	}
+
+	public int getProduto() {
 		return produto;
 	}
-	public void setProduto(Produto produto) {
+	public void setProduto(int produto) {
 		this.produto = produto;
 	}
 	public int getQuantVenda() {
@@ -37,6 +50,14 @@ public class ItemVenda {
 	}
 	public void setValorVenda(double valorVenda) {
 		this.valorVenda = valorVenda;
+	}
+	
+	public String getCompraFinalizada() {
+		return compraFinalizada;
+	}
+
+	public void setCompraFinalizada(String compraFinalizada) {
+		this.compraFinalizada = compraFinalizada;
 	}
 	//
 	@Override

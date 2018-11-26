@@ -51,6 +51,7 @@ public class TelaFornecedor extends JPanel {
 	private JTextField txtNumCompra;
 	private JComboBox comboBProd;
 	private JComboBox comboBoxCmp;
+	private JTextField txtBuscaNome;
 
 	/**
 	 * Create the panel.
@@ -197,6 +198,30 @@ public class TelaFornecedor extends JPanel {
 		});
 		btnExcluir.setBounds(675, 54, 75, 23);
 		pnlConsultar.add(btnExcluir);
+		
+		txtBuscaNome = new JTextField();
+		txtBuscaNome.setColumns(10);
+		txtBuscaNome.setBounds(10, 70, 164, 31);
+		pnlConsultar.add(txtBuscaNome);
+		
+		JButton btnBuscarPorCnpj = new JButton("Buscar por CNPJ");
+		btnBuscarPorCnpj.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				lerJTablePorCnpj(txtBuscaNome.getText());
+			}
+		});
+		btnBuscarPorCnpj.setBounds(184, 70, 140, 31);
+		pnlConsultar.add(btnBuscarPorCnpj);
+		
+		JButton btnImprimirEmOrdem = new JButton("Imprimir em ordem Alfabetica");
+		btnImprimirEmOrdem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				lerJTableOrdemAlfabetica();
+			}
+		});
+		btnImprimirEmOrdem.setBounds(330, 70, 192, 31);
+		pnlConsultar.add(btnImprimirEmOrdem);
 
 		JPanel lblCadastrar = new JPanel();
 		tabbedPane.addTab("Cadastrar", null, lblCadastrar, null);
@@ -264,8 +289,8 @@ public class TelaFornecedor extends JPanel {
 		lblCadastrar.add(btnNewButton);
 
 		DefaultTableModel modelo = (DefaultTableModel) jTFor.getModel();
-		// lerJTable();
-
+		lerJTable();
+		
 		txtCpfFrn = new JTextField();
 		txtCpfFrn.setColumns(10);
 		txtCpfFrn.setBounds(41, 121, 174, 29);
@@ -310,17 +335,17 @@ public class TelaFornecedor extends JPanel {
 				int codProd; // Var temporaria para usar o metodo criado na Produto
 
 				codProd = pDAO.buscaNomeRetornaCodigo(comboBProd.getSelectedItem().toString());
+				System.out.println(codProd);
 				ic.setProduto(codProd);
 				ic.setCompraFinalizada("N");
 				ic.setQuantCompra(Integer.parseInt(txtQntde.getText()));
-				ic.setValorCompra(icDAO.calculaVlr(Integer.parseInt(txtQntde.getText()),
-						(Integer.parseInt((String) comboBProd.getSelectedItem())))); // Preco prod * qntde
+				ic.setValorCompra(icDAO.calculaVlr(Integer.parseInt(txtQntde.getText()),codProd)); // Preco prod * qntde
 
 				icDAO.create(ic);
 
 				txtQntde.setText("");
 
-				lerJTable();
+				lerJTableItemCompra();
 
 			}
 		});
@@ -343,7 +368,7 @@ public class TelaFornecedor extends JPanel {
 
 					icDAO.delete(ic);
 
-					lerJTable();
+					lerJTableItemCompra();
 				} // Colocar um else (selecione um produto p excluir em um optionpanel
 			}
 		});
@@ -360,8 +385,8 @@ public class TelaFornecedor extends JPanel {
 			public void mouseClicked(MouseEvent arg0) {
 				if (jTCarri.getSelectedRow() != -1) {
 
-					txtNumCompra.setText(jTCarri.getValueAt(jTCarri.getSelectedRow(), 1).toString());
-
+					txtNumCompra.setText(jTCarri.getValueAt(jTCarri.getSelectedRow(), 0).toString());
+					txtQntde.setText(jTCarri.getValueAt(jTCarri.getSelectedRow(), 2).toString());
 				}
 
 			}
@@ -392,17 +417,19 @@ public class TelaFornecedor extends JPanel {
 				FornecedorDAO fDAO = new FornecedorDAO();
 				int codProd = 0; // Tmp pro codigo do produto usado abaixo
 
-				if (cDAO.cmpFinalizada((int) jTFor.getValueAt(jTFor.getSelectedRow(), 0))) {
+				if (cDAO.cmpFinalizada((int) jTCarri.getValueAt(jTCarri.getSelectedRow(), 0))) {
 
 					int codFrn; // Var temporaria para usar o metodo criado na Produto
-					codFrn = fDAO.buscaNomeRetornaCodigo(comboBFrn.getSelectedItem().toString());
+					codFrn = fDAO.buscaNomeRetornaCodigo((String) comboBFrn.getSelectedItem());
 					c.setFornecedor(codFrn);
 					c.setNumCompra(Integer.parseInt(txtNumCompra.getText()));
-
 					cDAO.create(c);
+					cDAO.updateCmpFnl(Integer.parseInt(txtNumCompra.getText()));
+					codProd = (int) jTCarri.getValueAt(jTCarri.getSelectedRow(), 1);
 					cDAO.updEstoq(codProd, Integer.parseInt(txtQntde.getText()));
 
 					txtQntde.setText("");
+					lerJTableItemCompra();
 
 				} else {
 					JOptionPane.showMessageDialog(null, "Compra ja finalizada", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -414,6 +441,10 @@ public class TelaFornecedor extends JPanel {
 		btnFinalizar.setBounds(487, 317, 89, 31);
 		lblCompra.add(btnFinalizar);
 
+
+		DefaultTableModel modeloItemCompra = (DefaultTableModel) jTCarri.getModel();
+		lerJTableItemCompra();
+		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(0, 295, 820, 2);
 		lblCompra.add(separator_1);
@@ -456,19 +487,20 @@ public class TelaFornecedor extends JPanel {
 
 					Compra c = new Compra();
 					CompraDAO cDAO = new CompraDAO();
-
-					c.setNumCompra(Integer.parseInt((String)comboBoxCmp.getSelectedItem()));
+					System.out.println((int)comboBoxCmp.getSelectedItem());
+					c.setNumCompra((int)comboBoxCmp.getSelectedItem());
 
 					cDAO.delete(c);
+					populaBoxCmp();
 				}
 			}
 
 		});
 		btnExcluirCompra.setBounds(153, 387, 133, 31);
 		lblCompra.add(btnExcluirCompra);
-		// populaBoxFrn();//Metodo não testado
-		// populaBoxPrd();//Metodo não testado
-		// populaBoxCmp();
+		populaBoxFrn();//Metodo não testado
+		populaBoxProd();//Metodo não testado
+		populaBoxCmp();
 
 		JLabel lblClientes = new JLabel("Fornecedor");
 		lblClientes.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -485,16 +517,17 @@ public class TelaFornecedor extends JPanel {
 		List<Fornecedor> lista = frnDAO.read();
 		comboBFrn.addItem("");
 		for (int i = 0; i < lista.size(); i++) {
-			comboBFrn.addItem(lista.get(i).getNome());
+			comboBFrn.addItem(new String (lista.get(i).getNome()));
 		}
 	}
 
 	private void populaBoxCmp() {
 		CompraDAO cmpDAO = new CompraDAO();
+		comboBoxCmp.removeAllItems();
 		List<Compra> lista = cmpDAO.read();
 		comboBoxCmp.addItem("");
 		for (int i = 0; i < lista.size(); i++) {
-			comboBFrn.addItem(lista.get(i).getNumCompra());
+			comboBoxCmp.addItem(lista.get(i).getNumCompra());
 		}
 	}
 
@@ -503,7 +536,7 @@ public class TelaFornecedor extends JPanel {
 		List<Produto> lista = prdDAO.read();
 		comboBProd.addItem("");
 		for (int i = 0; i < lista.size(); i++) {
-			comboBFrn.addItem(lista.get(i).getNome());
+			comboBProd.addItem(lista.get(i).getNome());
 		}
 	}
 
@@ -515,6 +548,33 @@ public class TelaFornecedor extends JPanel {
 		for (Fornecedor f : vDAO.read()) {
 			modelo.addRow(new Object[] { f.getCodigo(), f.getNome(), f.getTelefones(), f.getCnpj(), f.getEmail(),
 					f.getDataCad(), f.getNomeContato()
+
+			});
+		}
+
+	}
+	
+	public void lerJTableOrdemAlfabetica() {
+		DefaultTableModel modelo = (DefaultTableModel) jTFor.getModel();
+		modelo.setNumRows(0);
+		FornecedorDAO vDAO = new FornecedorDAO();
+
+		for (Fornecedor f : vDAO.imprimirOrdemAlfabetica()) {
+			modelo.addRow(new Object[] { f.getCodigo(), f.getNome(), f.getTelefones(), f.getCnpj(), f.getEmail(),
+					f.getDataCad(), f.getNomeContato()
+
+			});
+		}
+
+	}
+	
+	public void lerJTableItemCompra() {
+		DefaultTableModel modeloItemCompra = (DefaultTableModel) jTCarri.getModel();
+		modeloItemCompra.setNumRows(0);
+		ItemCompraDAO icDAO = new ItemCompraDAO();
+
+		for (ItemCompra ic : icDAO.read()) {
+			modeloItemCompra.addRow(new Object[] { ic.getCodCompra(), ic.getProduto(), ic.getQuantCompra(), ic.getValorCompra(), ic.getCompraFinalizada()
 
 			});
 		}

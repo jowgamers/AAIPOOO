@@ -45,6 +45,7 @@ public class TelaVendedor extends JPanel {
 	private JTextField txtCTel;
 	private JTextField txtCEmail;
 	private JTextField txtCMetaMes;
+	private JTextField txtBuscaNome;
 
 	/**
 	 * Create the panel.
@@ -61,7 +62,7 @@ public class TelaVendedor extends JPanel {
 		add(tabbedPane);
 		
 		JPanel pnlConsultar = new JPanel();
-		tabbedPane.addTab("Deletar", null, pnlConsultar, null);
+		tabbedPane.addTab("Consultar", null, pnlConsultar, null);
 		pnlConsultar.setLayout(null);
 		
 
@@ -96,7 +97,7 @@ public class TelaVendedor extends JPanel {
 		
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 88, 800, 368);
+		scrollPane.setBounds(10, 114, 800, 342);
 		pnlConsultar.add(scrollPane);
 
 		
@@ -201,9 +202,24 @@ public class TelaVendedor extends JPanel {
 		btnExcluir.setBounds(675, 54, 75, 23);
 		pnlConsultar.add(btnExcluir);
 		
+		txtBuscaNome = new JTextField();
+		txtBuscaNome.setColumns(10);
+		txtBuscaNome.setBounds(10, 65, 149, 31);
+		pnlConsultar.add(txtBuscaNome);
+		
+		JButton btnBuscarPorCpf = new JButton("Buscar por CPF");
+		btnBuscarPorCpf.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				lerJTablePorCpf(txtBuscaNome.getText());
+			}
+		});
+		btnBuscarPorCpf.setBounds(170, 65, 150, 31);
+		pnlConsultar.add(btnBuscarPorCpf);
+		
 		
 		JPanel lblCadastrar = new JPanel();
-		tabbedPane.addTab("Consultar", null, lblCadastrar, null);
+		tabbedPane.addTab("Cadastrar", null, lblCadastrar, null);
 		lblCadastrar.setLayout(null);
 		
 		txtNomeVend = new JTextField();
@@ -234,7 +250,7 @@ public class TelaVendedor extends JPanel {
 		lblCadastrar.add(txtEmlVnd);
 		
 		DefaultTableModel modelo = (DefaultTableModel) jTVend.getModel();
-		//lerJTable();
+		lerJTable();
 		
 		JLabel lblMetaMensal_1 = new JLabel("Meta Mensal : ");
 		lblMetaMensal_1.setBounds(41, 291, 97, 14);

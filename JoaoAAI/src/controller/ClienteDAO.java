@@ -73,9 +73,9 @@ public class ClienteDAO {
 				c.setCodigo(rs.getInt("cod_cli"));
 				c.setNome(rs.getString("nom_cli"));
 				c.setTelefones(rs.getString("tel_cli"));
-				c.setEmail(rs.getString("eml_cli"));
-				c.setDataCad(rs.getDate("dta_cad_vnd"));
 				c.setCpf(rs.getString("cpf_cli"));
+				c.setEmail(rs.getString("eml_cli"));
+				c.setDataCad(rs.getDate("dta_cad_cli"));
 				c.setLimiteCredito(rs.getDouble("lmt_crd"));
 				
 				listaClientes.add(c);
@@ -177,7 +177,7 @@ public class ClienteDAO {
 				c.setNome(rs.getString("nom_cli"));
 				c.setTelefones(rs.getString("tel_cli"));
 				c.setEmail(rs.getString("eml_cli"));
-				c.setDataCad(rs.getDate("dta_cad_vnd"));
+				c.setDataCad(rs.getDate("dta_cad_cli"));
 				c.setCpf(rs.getString("cpf_cli"));
 				c.setLimiteCredito(rs.getDouble("lmt_crd"));
 				
@@ -248,7 +248,7 @@ public class ClienteDAO {
 				c.setNome(rs.getString("nom_cli"));
 				c.setTelefones(rs.getString("tel_cli"));
 				c.setEmail(rs.getString("eml_cli"));
-				c.setDataCad(rs.getDate("dta_cad_vnd"));
+				c.setDataCad(rs.getDate("dta_cad_cli"));
 				c.setCpf(rs.getString("cpf_cli"));
 				c.setLimiteCredito(rs.getDouble("lmt_crd"));
 				

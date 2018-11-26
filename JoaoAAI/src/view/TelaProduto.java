@@ -48,7 +48,7 @@ public class TelaProduto extends JPanel {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setLocation(new Point(500, 300));
 		tabbedPane.setForeground(Color.WHITE);
-		tabbedPane.setBounds(0, 38, 825, 517);
+		tabbedPane.setBounds(0, 64, 825, 491);
 		add(tabbedPane);
 
 		JPanel consultarPanel = new JPanel();
@@ -56,7 +56,7 @@ public class TelaProduto extends JPanel {
 		consultarPanel.setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 139, 800, 339);
+		scrollPane.setBounds(10, 110, 800, 368);
 		consultarPanel.add(scrollPane);
 
 		jTProd = new JTable();
@@ -83,39 +83,39 @@ public class TelaProduto extends JPanel {
 		scrollPane.setViewportView(jTProd);
 
 		txtCNome = new JTextField();
-		txtCNome.setBounds(10, 44, 164, 31);
+		txtCNome.setBounds(10, 26, 164, 31);
 		consultarPanel.add(txtCNome);
 		txtCNome.setColumns(10);
 
 		txtCVlr = new JTextField();
 		txtCVlr.setColumns(10);
-		txtCVlr.setBounds(184, 44, 86, 31);
+		txtCVlr.setBounds(184, 26, 86, 31);
 		consultarPanel.add(txtCVlr);
 
 		txtCEstoq = new JTextField();
 		txtCEstoq.setColumns(10);
-		txtCEstoq.setBounds(280, 44, 86, 31);
+		txtCEstoq.setBounds(280, 26, 86, 31);
 		consultarPanel.add(txtCEstoq);
 
 		txtCEstoqMin = new JTextField();
 		txtCEstoqMin.setColumns(10);
-		txtCEstoqMin.setBounds(376, 44, 86, 31);
+		txtCEstoqMin.setBounds(376, 26, 86, 31);
 		consultarPanel.add(txtCEstoqMin);
 
 		JLabel lblNome_1 = new JLabel("Nome");
-		lblNome_1.setBounds(10, 29, 46, 14);
+		lblNome_1.setBounds(10, 11, 46, 14);
 		consultarPanel.add(lblNome_1);
 
 		JLabel lblVlrUnidade = new JLabel("Vlr Unidade: ");
-		lblVlrUnidade.setBounds(184, 29, 86, 14);
+		lblVlrUnidade.setBounds(184, 11, 86, 14);
 		consultarPanel.add(lblVlrUnidade);
 
 		JLabel lblQntEstoque = new JLabel("Qnt Estoque: ");
-		lblQntEstoque.setBounds(280, 29, 86, 14);
+		lblQntEstoque.setBounds(280, 11, 86, 14);
 		consultarPanel.add(lblQntEstoque);
 
 		JLabel lblQntEstoqueMinima = new JLabel("Qnt Estoque Minima: ");
-		lblQntEstoqueMinima.setBounds(376, 29, 154, 14);
+		lblQntEstoqueMinima.setBounds(376, 11, 154, 14);
 		consultarPanel.add(lblQntEstoqueMinima);
 
 		JButton btnAtualizar = new JButton("Atualizar");
@@ -144,7 +144,7 @@ public class TelaProduto extends JPanel {
 				} // Colocar um else (selecione um produto p excluir em um optionpanel
 			}
 		});
-		btnAtualizar.setBounds(472, 44, 98, 31);
+		btnAtualizar.setBounds(472, 26, 98, 31);
 		consultarPanel.add(btnAtualizar);
 
 		JButton btnExcluir = new JButton("Excluir");
@@ -168,15 +168,15 @@ public class TelaProduto extends JPanel {
 				} // Colocar um else (selecione um produto p excluir em um optionpanel
 			}
 		});
-		btnExcluir.setBounds(580, 44, 98, 31);
+		btnExcluir.setBounds(580, 26, 98, 31);
 		consultarPanel.add(btnExcluir);
 
 		txtBuscaNome = new JTextField();
 		txtBuscaNome.setColumns(10);
-		txtBuscaNome.setBounds(10, 97, 164, 31);
+		txtBuscaNome.setBounds(10, 68, 164, 31);
 		consultarPanel.add(txtBuscaNome);
 
-		JButton btnPesquisar = new JButton("Buscar");
+		JButton btnPesquisar = new JButton("Buscar por Nome");
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -184,11 +184,32 @@ public class TelaProduto extends JPanel {
 
 			}
 		});
-		btnPesquisar.setBounds(184, 97, 98, 31);
+		btnPesquisar.setBounds(184, 68, 148, 31);
 		consultarPanel.add(btnPesquisar);
+		
+		JButton btnImprimePorOrdem = new JButton("Imprime por Ordem Alfab\u00E9tica");
+		btnImprimePorOrdem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				lerJTableOrdemAlfabetica();
+				
+			}
+		});
+		btnImprimePorOrdem.setBounds(342, 68, 188, 31);
+		consultarPanel.add(btnImprimePorOrdem);
+		
+		JButton btnImprimePorOrdem_1 = new JButton("Imprime por Ordem Alfab\u00E9tica abaixo da M\u00E9dia");
+		btnImprimePorOrdem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				lerJTableOrdemAlfabeticaAbaixoDaMedia();
+				
+			}
+		});
+		btnImprimePorOrdem_1.setBounds(540, 68, 270, 31);
+		consultarPanel.add(btnImprimePorOrdem_1);
 
 		DefaultTableModel modelo = (DefaultTableModel) jTProd.getModel();
-		//lerJTable();
+		lerJTable();
 
 		JPanel cadastrarPanel = new JPanel();
 		cadastrarPanel.setBackground(new Color(32, 178, 170));
@@ -257,12 +278,12 @@ public class TelaProduto extends JPanel {
 		btnCadastrar.setBounds(67, 375, 89, 23);
 		cadastrarPanel.add(btnCadastrar);
 
-		JLabel lblClientes = new JLabel("Produto");
+		JLabel lblClientes = new JLabel("Produtos : ");
 		lblClientes.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblClientes.setHorizontalAlignment(SwingConstants.CENTER);
 		lblClientes.setForeground(Color.WHITE);
 		lblClientes.setFont(new Font("Tahoma", Font.PLAIN, 31));
-		lblClientes.setBounds(0, 0, 203, 45);
+		lblClientes.setBounds(10, 8, 203, 45);
 		add(lblClientes);
 	}
 
@@ -272,6 +293,20 @@ public class TelaProduto extends JPanel {
 		ProdutoDAO pDAO = new ProdutoDAO();
 
 		for (Produto p : pDAO.read()) {
+			modelo.addRow(new Object[] { p.getCodigo(), p.getNome(), p.getPrecoUnitario(), p.getEstoque(),
+					p.getEstoqueminimo(), p.getDataCad()
+
+			});
+		}
+
+	}
+	
+	public void lerJTableOrdemAlfabeticaAbaixoDaMedia() {
+		DefaultTableModel modelo = (DefaultTableModel) jTProd.getModel();
+		modelo.setNumRows(0);
+		ProdutoDAO pDAO = new ProdutoDAO();
+
+		for (Produto p : pDAO.imprimirProdEstoqAbxMediaAfb()) {
 			modelo.addRow(new Object[] { p.getCodigo(), p.getNome(), p.getPrecoUnitario(), p.getEstoque(),
 					p.getEstoqueminimo(), p.getDataCad()
 
@@ -293,6 +328,21 @@ public class TelaProduto extends JPanel {
 		}
 
 	}
+	
+	public void lerJTableOrdemAlfabetica() {
+		DefaultTableModel modelo = (DefaultTableModel) jTProd.getModel();
+		modelo.setNumRows(0);
+		ProdutoDAO pDAO = new ProdutoDAO();
+
+		for (Produto p : pDAO.imprimirOrdemAlfabetica()) {
+			modelo.addRow(new Object[] { p.getCodigo(), p.getNome(), p.getPrecoUnitario(), p.getEstoque(),
+					p.getEstoqueminimo(), p.getDataCad()
+
+			});
+		}
+	}
+		
+	
 	
 
 }

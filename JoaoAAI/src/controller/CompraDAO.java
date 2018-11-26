@@ -63,12 +63,10 @@ public class CompraDAO {
 		PreparedStatement stmt = null;
 
 		try {
-			stmt = con.prepareStatement("UPDATE produtos SET qnt_estoq = qnt_estoq - " +qntde+ " WHERE cod_prod = ?"); 
+			stmt = con.prepareStatement("UPDATE produtos SET qnt_estoq = qnt_estoq + " +qntde+ " WHERE cod_prod = ?"); 
 			stmt.setInt(1, codProd);
 			stmt.executeUpdate();
-
-			JOptionPane.showMessageDialog(null, "Produto atualizado com sucesso", "Acões BD", JOptionPane.PLAIN_MESSAGE);
-
+			
 		} catch (SQLException e) {
 
 			JOptionPane.showMessageDialog(null, "Erro ao atualizar produto" + e, "Acões BD", JOptionPane.ERROR_MESSAGE);
@@ -93,7 +91,7 @@ public class CompraDAO {
 		//Falta colocar um metodo para fechar a conexão
 		try {
 
-			stmt = con.prepareStatement("SELECT * from usuario WHERE cmp_fnl = 'N' and id_tmp_cmp = ?"); // Devo usar aspas simples msm? ou + ?
+			stmt = con.prepareStatement("SELECT * from itemcompra WHERE cmp_fnl = 'N' and id_itm_cmp = ?"); // Devo usar aspas simples msm? ou + ?
 			stmt.setInt(1, id_itm_cmp);
 			rs = stmt.executeQuery();
 
@@ -141,6 +139,40 @@ public class CompraDAO {
 		}
 		return listaCompra;
 
+		
+	}
+	public List<Compra> readByOrdemFrnceDtaVnd() {
+
+		Connection con = null;
+
+		try {
+			con = ConnectionManager.getMysqlConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		List<Compra> listaCompra = new ArrayList<Compra>();
+
+		try {
+			stmt = con.prepareStatement("SELECT * FROM compra order by cod_frn asc, dta_cmp desc");
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				Compra c = new Compra();
+				c.setNumCompra(rs.getInt("num_cmp"));
+				c.setFornecedor(rs.getInt("cod_frn"));
+				c.setDataCompra(rs.getDate("dta_cmp"));
+				listaCompra.add(c);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listaCompra;
+
 	}
 
 	public void delete(Compra c) {
@@ -165,6 +197,34 @@ public class CompraDAO {
 		} catch (SQLException e) {
 
 			JOptionPane.showMessageDialog(null, "Erro ao excluir compra " + e, "Acões BD", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+
+	}
+	
+	public void updateCmpFnl(int id_itm_cmp) {
+
+		Connection con = null;
+
+		try {
+			con = ConnectionManager.getMysqlConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		PreparedStatement stmt = null;
+
+		try {
+			stmt = con.prepareStatement(
+					"UPDATE itemcompra SET cmp_fnl = 'S' WHERE id_itm_cmp = ?");
+
+			stmt.setInt(1, id_itm_cmp);
+			stmt.executeUpdate();
+
+		} catch (SQLException e) {
+
+			JOptionPane.showMessageDialog(null, "Erro ao atualizar fornecedor" + e, "Acões BD",
+					JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
 

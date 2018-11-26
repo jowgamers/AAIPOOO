@@ -104,7 +104,7 @@ public class FornecedorDAO {
 
 		try {
 			stmt = con.prepareStatement(
-					"UPDATE vendedores SET nom_frn = ? , tel_frn = ? , cnpj_frn = ? , eml_frn = ? , nom_cto = ? WHERE cod_frn = ?");
+					"UPDATE fornecedores SET nom_frn = ? , tel_frn = ? , cnpj_frn = ? , eml_frn = ? , nom_cto = ? WHERE cod_frn = ?");
 
 			stmt.setString(1, f.getNome());
 			stmt.setString(2, f.getTelefones());
@@ -139,7 +139,7 @@ public class FornecedorDAO {
 		PreparedStatement stmt = null;
 
 		try {
-			stmt = con.prepareStatement("DELETE FROM fornecedores WHERE cod_vnd = ?");
+			stmt = con.prepareStatement("DELETE FROM fornecedores WHERE cod_frn = ?");
 			stmt.setInt(1, f.getCodigo());
 			stmt.executeUpdate();
 

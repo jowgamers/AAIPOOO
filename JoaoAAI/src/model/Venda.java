@@ -6,9 +6,10 @@ import java.util.Date;
 public class Venda {
 
 	private int numVenda;
-	private Cliente cliente;
-	private Vendedor vendedor;
-	private ArrayList<ItemVenda> vendaItens = new ArrayList<ItemVenda>();
+	private int cliente;
+	private int idItemVenda;
+	private int vendedor;
+	private int vendaItens;
 	private int formaPagto;
 	private Date dataVenda;
 	
@@ -18,9 +19,10 @@ public class Venda {
 		
 	}
 	
-	public Venda(int numVenda, Cliente cliente, Vendedor vendedor, ArrayList<ItemVenda> vendaItens, int formaPagto,
+	public Venda(int numVenda, int cliente,int idItemVenda, int vendedor, int vendaItens, int formaPagto,
 			Date dataVenda) {
 		super();
+		this.idItemVenda = idItemVenda;
 		this.numVenda = numVenda;
 		this.cliente = cliente;
 		this.vendedor = vendedor;
@@ -29,6 +31,14 @@ public class Venda {
 		this.dataVenda = dataVenda;
 	}
 	
+	public int getIdItemVenda() {
+		return idItemVenda;
+	}
+
+	public void setIdItemVenda(int idItemVenda) {
+		this.idItemVenda = idItemVenda;
+	}
+
 	//
 	public int getNumVenda() {
 		return numVenda;
@@ -40,32 +50,32 @@ public class Venda {
 	}
 
 
-	public Cliente getCliente() {
+	public int getCliente() {
 		return cliente;
 	}
 
 
-	public void setCliente(Cliente cliente) {
+	public void setCliente(int cliente) {
 		this.cliente = cliente;
 	}
 
 
-	public Vendedor getVendedor() {
+	public int getVendedor() {
 		return vendedor;
 	}
 
 
-	public void setVendedor(Vendedor vendedor) {
+	public void setVendedor(int vendedor) {
 		this.vendedor = vendedor;
 	}
 
 
-	public ArrayList<ItemVenda> getVendaItens() {
+	public int getVendaItens() {
 		return vendaItens;
 	}
 
 
-	public void setVendaItens(ArrayList<ItemVenda> vendaItens) {
+	public void setVendaItens(int vendaItens) {
 		this.vendaItens = vendaItens;
 	}
 
